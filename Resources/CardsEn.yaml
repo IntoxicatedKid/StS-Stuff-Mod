@@ -1,0 +1,42 @@
+StSAlchemize:
+  Description: "Add a random |Tool| card to the library."
+  UpgradedDescription: "Add a random |Tool| card to the library."
+  Name: Alchemize
+StSDramaticEntrance:
+  Description: "|At the start of combat|: |Exile| {SelfName}, Deal {Value1} damage to each enemy."
+  UpgradedDescription: "|At the start of combat|: |Exile| {SelfName}, Deal {Value1} damage to each enemy."
+  Name: Dramatic Entrance
+StSEntrench:
+  Description: "Double the current |Block| and |Barrier|."
+  UpgradedDescription: "Double the current |Block| and |Barrier|."
+  Name: Entrench
+StSFinesse:
+  Description: "Gain {Block} |Block|.\nDraw {Value1} card{Value1:plural one='' other='s'}."
+  UpgradedDescription: "Gain {Block} |Block|.\nDraw {Value1} card{Value1:plural one='' other='s'}."
+  Name: Finesse
+StSGoodInstincts:
+  Description: Gain {Block} |Block|.
+  UpgradedDescription: Gain {Block} |Block|.
+  Name: Good Instincts
+StSLimitBreak:
+  Description: Double the current |Firepower| and |Temporary Firepower|.
+  UpgradedDescription: Double the current |Firepower| and |Temporary Firepower|.
+  Name: Limit Break
+StSMindBlast:
+  NonbattleDescription: Deal damage equal to the number of cards in the draw pile.
+  UpgradedNonbattleDescription: Deal damage equal to the number of cards in the draw pile.
+  Description: Deal damage equal to the number of cards in the draw pile. ({Damage})
+  UpgradedDescription: Deal damage equal to the number of cards in the draw pile. ({Damage})
+  Name: Mind Blast
+StSPanacea:
+  Description: "Remove all debuffs from {PlayerName}.\nGain {Value1} |Amulet|."
+  UpgradedDescription: "Remove all debuffs from {PlayerName}.\nGain {Value1} |Amulet|."
+  Name: Panacea
+StSPanicButton:
+  Description: "Gain {Block} |Block|.\n{PlayerName} can't gain |Block| or |Barrier| from cards for {Value1} turn{Value1:plural one='' other='s'}."
+  UpgradedDescription: "Gain {Block} |Block|.\n{PlayerName} can't gain |Block| or |Barrier| from cards for {Value1} turn{Value1:plural one='' other='s'}."
+  Name: Panic Button
+StSPerfectedStrike:
+  Description: "Deal {Damage} damage.\nFor each |Basic| cards in the library, {SelfName} deals {Value1} more damage."
+  UpgradedDescription: "Deal {Damage} damage.\nFor each |Basic| cards in the library, {SelfName} deals {Value1} more damage."
+  Name: Perfected Strike

@@ -1,0 +1,4 @@
+StSPanicButtonSe:
+    Brief: "Can't gain |Block| or |Barrier| from cards."
+    Description: "{OwnerName} can't gain |Block| or |Barrier| from cards for {Duration} turn{Duration:plural one='' other='s'}."
+    Name: Panic Button

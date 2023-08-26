@@ -1,0 +1,36 @@
+StSBustedCrown:
+  Description: "Adds {BaseMana} to the mana base.\nCard rewards have {Value1} less option{Value1:plural one='' other='s'}.\n{SelfName} can't be found after act 3."
+  Name: Busted Crown
+  FlavorText: "The Champ's crown... or a pale imitation?"
+StSCoffeeDripper:
+  Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nRemoves the ability to |Drink| at Gaps."
+  Name: Coffee Dripper
+  FlavorText: '"Yes, another cup please. Back to work. Back to work!" -The Architect'
+StSCursedKey:
+  Description: "Adds {BaseMana} to the mana base.\nWhenever {PlayerName} visits Reisen, add a random |Misfortune| card to the library.\n{SelfName} can't be found after act 3."
+  Name: Cursed Key
+  FlavorText: "You can feel the malicious energy emanating from the key. Power comes at a price."
+StSEctoplasm:
+  Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer gain <sprite=\"Point\" name=\"Gold\">.\n{SelfName} can't be found after act 3."
+  Name: Ectoplasm
+  FlavorText: "This blob of slime and energy seems to pulse with life."
+StSFusionHammer:
+  Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nRemoves the ability to |Upgrade| at Gaps."
+  Name: Fusion Hammer
+  FlavorText: "Once wielded, the owner can never let go."
+StSPhilosophersStone:
+  Description: "Adds {BaseMana} to the mana base.\nAt the start of combat, enemies gain {Value1} |Firepower|.\n{SelfName} can't be found after act 3."
+  Name: Philosopher's Stone
+  FlavorText: "This blob of slime and energy seems to pulse with life."
+StSRunicDome:
+  Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer see enemy intents.\n{SelfName} can't be found after act 3."
+  Name: Runic Dome
+  FlavorText: "The runes are indecipherable."
+StSRunicPyramid:
+  Description: "At the end of {PlayerName}'s turn, no longer discard non-|Misfortune| and non-status cards."
+  Name: Runic Pyramid
+  FlavorText: "The runes are indecipherable."
+StSSneckoEye:
+  Description: "Draw {Value1} more {Value1:plural one='card' other='cards'} during the draw step.\nWhenever a card is drawn, it costs between <sprite=\"ManaSprite\" name=\"0\"> to <sprite=\"ManaSprite\" name=\"5\"> this combat."
+  Name: Snecko Eye
+  FlavorText: "An eye of a fallen snecko. Much larger than you imagined."
