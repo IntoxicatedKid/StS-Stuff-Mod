@@ -335,6 +335,7 @@
       <None Remove="Resources\StSPhilosophersStone.png" />
       <None Remove="Resources\StSRunicDome.png" />
       <None Remove="Resources\StSRunicPyramid.png" />
+      <None Remove="Resources\StSSacredBark.png" />
       <None Remove="Resources\StSSneckoEye.png" />
     </ItemGroup>
 

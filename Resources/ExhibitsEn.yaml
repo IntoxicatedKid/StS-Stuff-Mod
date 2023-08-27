@@ -30,6 +30,10 @@ StSRunicPyramid:
   Description: "At the end of {PlayerName}'s turn, no longer discard non-|Misfortune| and non-status cards."
   Name: Runic Pyramid
   FlavorText: "The runes are indecipherable."
+StSSacredBark:
+  Description: "Increases the numeric effects of |Tool| cards by {Value1}%."
+  Name: Sacred Bark
+  FlavorText: "A bark rumored to originate from the World tree."
 StSSneckoEye:
   Description: "Draw {Value1} more {Value1:plural one='card' other='cards'} during the draw step.\nWhenever a card is drawn, it costs between <sprite=\"ManaSprite\" name=\"0\"> to <sprite=\"ManaSprite\" name=\"5\"> this combat."
   Name: Snecko Eye

@@ -35,6 +35,7 @@ using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 using LBoL.Core.GapOptions;
 using LBoL.Core.Stations;
+using LBoL.Presentation.UI;
 
 namespace StSStuffMod
 {
@@ -65,14 +66,14 @@ namespace StSStuffMod
                 Index: sequenceTable.Next(typeof(ExhibitConfig)),
                 Id: "",
                 Order: 10,
-                IsDebug: true,
+                IsDebug: false,
                 IsPooled: true,
                 IsSentinel: false,
                 Revealable: false,
                 Appearance: AppearanceType.ShopOnly,
                 Owner: "",
                 LosableType: ExhibitLosableType.Losable,
-                Rarity: Rarity.Common,
+                Rarity: Rarity.Uncommon,
                 Value1: null,
                 Value2: null,
                 Value3: null,
@@ -98,7 +99,8 @@ namespace StSStuffMod
                 base.HandleGameRunEvent<StationEventArgs>(base.GameRun.GapOptionsGenerating, delegate (StationEventArgs args)
                 {
                     base.NotifyActivating();
-                    ((GapStation)args.Station).GapOptions.Remove(Library.CreateGapOption<DrinkTea>());
+                    ((GapStation)args.Station).GapOptions.RemoveAll(o => o.Type == GapOptionType.DrinkTea);
+                    args.Station.Finish();
                 });
             }
             protected override void OnEnterBattle()

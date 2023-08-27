@@ -3,7 +3,7 @@ StSAlchemize:
   UpgradedDescription: "Add a random |Tool| card to the library."
   Name: Alchemize
 StSDramaticEntrance:
-  Description: "|At the start of combat|: |Exile| {SelfName}, Deal {Value1} damage to each enemy."
+  Description: "Deal {Damage} damage to each enemy."
   UpgradedDescription: "|At the start of combat|: |Exile| {SelfName}, Deal {Value1} damage to each enemy."
   Name: Dramatic Entrance
 StSEntrench:

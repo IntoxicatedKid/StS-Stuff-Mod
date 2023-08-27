@@ -65,14 +65,14 @@ namespace StSStuffMod
                 Index: sequenceTable.Next(typeof(ExhibitConfig)),
                 Id: "",
                 Order: 10,
-                IsDebug: true,
+                IsDebug: false,
                 IsPooled: true,
                 IsSentinel: false,
                 Revealable: false,
                 Appearance: AppearanceType.ShopOnly,
                 Owner: "",
                 LosableType: ExhibitLosableType.Losable,
-                Rarity: Rarity.Common,
+                Rarity: Rarity.Uncommon,
                 Value1: null,
                 Value2: null,
                 Value3: null,
@@ -95,15 +95,11 @@ namespace StSStuffMod
         {
             protected override void OnAdded(PlayerUnit player)
             {
-                base.HandleGameRunEvent<StationEventArgs>(base.GameRun.StationEntered, delegate (StationEventArgs args)
+                base.HandleGameRunEvent<StationEventArgs>(base.GameRun.GapOptionsGenerating, delegate (StationEventArgs args)
                 {
-                    if (args.Station.Type == StationType.Gap)
-                    {
-                        base.NotifyActivating();
-                        GapStation gapStation = (GapStation)args.Station;
-                        ((GapStation)args.Station).GapOptions.Remove(Library.CreateGapOption<UpgradeCard>());
-                        base.GameRun.GapOptionsGenerating.Execute(new StationEventArgs {Station = gapStation, CanCancel = false });
-                    }
+                    base.NotifyActivating();
+                    ((GapStation)args.Station).GapOptions.RemoveAll(o => o.Type == GapOptionType.UpgradeCard);
+                    args.Station.Finish();
                 });
             }
             protected override void OnEnterBattle()

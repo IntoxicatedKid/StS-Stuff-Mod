@@ -100,7 +100,7 @@ namespace StSStuffMod
                 if (base.Battle.PlayerTurnShouldEnd)
                 {
                     Card card = args.Card;
-                    if (!(card.CardType == CardType.Misfortune) || !(card.CardType == CardType.Status))
+                    if ((card.CardType != CardType.Misfortune) && (card.CardType != CardType.Status))
                     {
                         base.NotifyActivating();
                         args.CancelBy(this);
