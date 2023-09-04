@@ -1,3 +1,15 @@
+StSAccuracySe:
+    Brief: "Damage of |Throwing Knives| are increased."
+    Description: "|Throwing Knives| deal {Level} more damage."
+    Name: Accuracy
+StSMayhemSe:
+    Brief: "At the start of {PlayerName}'s turn, put the top card of the draw pile into the hand. Then, play that card."
+    Description: "At the start of {OwnerName}'s turn, place {Level} card{Level:plural one='' other='s'} on top of the draw pile into the hand. Then, play that card."
+    Name: Mayhem
+StSPanacheSe:
+    Brief: "Whenever {PlayerName} plays certain amount of cards in a turn, deal damage to each enemy."
+    Description: "deal {Level} damage to each enemy after playing {Count:plural one='% more card' other='% more cards'}."
+    Name: Panache
 StSPanicButtonSe:
     Brief: "Can't gain |Block| or |Barrier| from cards."
     Description: "{OwnerName} can't gain |Block| or |Barrier| from cards for {Duration} turn{Duration:plural one='' other='s'}."

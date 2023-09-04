@@ -102,11 +102,9 @@ namespace StSStuffMod
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                List<Card> list = base.Battle.DrawZone.Where((Card card) => (card.CardType == CardType.Tool)).ToList<Card>();
-                if (list.Count > 0)
+                foreach (Card card in base.Battle.EnumerateAllCards())
                 {
-                    base.NotifyActivating();
-                    foreach (Card card in list)
+                    if (card.CardType == CardType.Tool)
                     {
                         if (card.Config.Damage != null && card.RawDamage > 0)
                         {
@@ -152,42 +150,39 @@ namespace StSStuffMod
             }
             private BattleAction ToolCardModify(IEnumerable<Card> cards)
             {
-                List<Card> list = cards.Where((Card card) => card.CardType == CardType.Tool).ToList<Card>();
-                if (list.Count == 0)
+                foreach (Card card in cards)
                 {
-                    return null;
-                }
-                base.NotifyActivating();
-                foreach (Card card in list)
-                {
-                    if (card.Config.Damage != null && card.RawDamage > 0)
+                    if (card.CardType == CardType.Tool)
                     {
-                        card.DeltaDamage += card.RawDamage * (base.Value1 / 100);
+                        if (card.Config.Damage != null && card.RawDamage > 0)
+                        {
+                            card.DeltaDamage += card.RawDamage * (base.Value1 / 100);
+                        }
+                        if (card.Config.Block != null && card.RawBlock > 0)
+                        {
+                            card.DeltaBlock += card.RawBlock * (base.Value1 / 100);
+                        }
+                        if (card.Config.Shield != null && card.RawShield > 0)
+                        {
+                            card.DeltaShield += card.RawShield * (base.Value1 / 100);
+                        }
+                        if (card.Config.Value1 != null && card.ConfigValue1 > 0)
+                        {
+                            card.DeltaValue1 += card.ConfigValue1 * (base.Value1 / 100);
+                        }
+                        if (card.Config.Value2 != null && card.ConfigValue2 > 0)
+                        {
+                            card.DeltaValue2 += card.ConfigValue2 * (base.Value1 / 100);
+                        }
+                        /*if (card.Config.Mana != null)
+                        {
+                            card.Config.Mana *= (base.Value1 / 50);
+                        }
+                        if (card.Config.Scry != null)
+                        {
+                            card.Config.Scry *= (base.Value1 / 50);
+                        }*/
                     }
-                    if (card.Config.Block != null && card.RawBlock > 0)
-                    {
-                        card.DeltaBlock += card.RawBlock * (base.Value1 / 100);
-                    }
-                    if (card.Config.Shield != null && card.RawShield > 0)
-                    {
-                        card.DeltaShield += card.RawShield * (base.Value1 / 100);
-                    }
-                    if (card.Config.Value1 != null && card.ConfigValue1 > 0)
-                    {
-                        card.DeltaValue1 += card.ConfigValue1 * (base.Value1 / 100);
-                    }
-                    if (card.Config.Value2 != null && card.ConfigValue2 > 0)
-                    {
-                        card.DeltaValue2 += card.ConfigValue2 * (base.Value1 / 100);
-                    }
-                    /*if (card.Config.Mana != null)
-                    {
-                        card.Config.Mana *= (base.Value1 / 50);
-                    }
-                    if (card.Config.Scry != null)
-                    {
-                        card.Config.Scry *= (base.Value1 / 50);
-                    }*/
                 }
                 return null;
             }

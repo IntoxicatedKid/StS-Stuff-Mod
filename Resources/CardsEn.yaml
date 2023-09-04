@@ -1,19 +1,39 @@
+StSAccuracy:
+  Description: "Increase the damage of |Throwing Knives| by {Value1}."
+  UpgradedDescription: "Increase the damage of |Throwing Knives| by {Value1}."
+  Name: Accuracy
 StSAlchemize:
   Description: "Add a random |Tool| card to the library."
   UpgradedDescription: "Add a random |Tool| card to the library."
   Name: Alchemize
+StSBlind:
+  Description: Apply {Value1} |Weak|.
+  UpgradedDescription: Apply {Value1} |Weak| to each enemy.
+  Name: Blind
 StSDramaticEntrance:
   Description: "Deal {Damage} damage to each enemy."
   UpgradedDescription: "|At the start of combat|: |Exile| {SelfName}, Deal {Value1} damage to each enemy."
   Name: Dramatic Entrance
 StSEntrench:
-  Description: "Double the current |Block| and |Barrier|."
+  Description: "Double the current |Block|."
   UpgradedDescription: "Double the current |Block| and |Barrier|."
   Name: Entrench
+StSExpertise:
+  Description: "Draw cards until there's {Value1} card{Value1:plural one='' other='s'} in the hand."
+  UpgradedDescription: "Draw cards until there's {Value1} card{Value1:plural one='' other='s'} in the hand."
+  Name: Expertise
 StSFinesse:
   Description: "Gain {Block} |Block|.\nDraw {Value1} card{Value1:plural one='' other='s'}."
   UpgradedDescription: "Gain {Block} |Block|.\nDraw {Value1} card{Value1:plural one='' other='s'}."
   Name: Finesse
+StSFlashofSteel:
+  Description: "Deal {Damage} damage.\nDraw {Value1} card{Value1:plural one='' other='s'}."
+  UpgradedDescription: "Deal {Damage} damage.\nDraw {Value1} card{Value1:plural one='' other='s'}."
+  Name: Flash of Steel
+StSFootwork:
+  Description: Gain {Value1} |Spirit|.
+  UpgradedDescription: Gain {Value1} |Spirit|.
+  Name: Footwork
 StSGoodInstincts:
   Description: Gain {Block} |Block|.
   UpgradedDescription: Gain {Block} |Block|.
@@ -22,21 +42,40 @@ StSLimitBreak:
   Description: Double the current |Firepower| and |Temporary Firepower|.
   UpgradedDescription: Double the current |Firepower| and |Temporary Firepower|.
   Name: Limit Break
+StSMayhem:
+  Description: "At the start of {PlayerName}'s turn, put the top card of the draw pile into the hand. Then, play that card."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, put the top card of the draw pile into the hand. Then, play that card."
+  Name: Mayhem
 StSMindBlast:
   NonbattleDescription: Deal damage equal to the number of cards in the draw pile.
   UpgradedNonbattleDescription: Deal damage equal to the number of cards in the draw pile.
   Description: Deal damage equal to the number of cards in the draw pile. ({Damage})
   UpgradedDescription: Deal damage equal to the number of cards in the draw pile. ({Damage})
   Name: Mind Blast
+StSNecronomicurse:
+  Description: "|When Exiled|: Return {SelfName} from the exile pile to the hand."
+  Name: Necronomicurse
 StSPanacea:
   Description: "Remove all debuffs from {PlayerName}.\nGain {Value1} |Amulet|."
   UpgradedDescription: "Remove all debuffs from {PlayerName}.\nGain {Value1} |Amulet|."
   Name: Panacea
+StSPanache:
+  Description: "Whenever {PlayerName} plays {Value1} card{Value1:plural one='' other='s'} in a turn, deal {Value2} damage to each enemy."
+  UpgradedDescription: "Whenever {PlayerName} plays {Value1} card{Value1:plural one='' other='s'} in a turn, deal {Value2} damage to each enemy."
+  Name: Panache
 StSPanicButton:
   Description: "Gain {Block} |Block|.\n{PlayerName} can't gain |Block| or |Barrier| from cards for {Value1} turn{Value1:plural one='' other='s'}."
   UpgradedDescription: "Gain {Block} |Block|.\n{PlayerName} can't gain |Block| or |Barrier| from cards for {Value1} turn{Value1:plural one='' other='s'}."
   Name: Panic Button
 StSPerfectedStrike:
-  Description: "Deal {Damage} damage.\nFor each |Basic| cards in the library, {SelfName} deals {Value1} more damage."
-  UpgradedDescription: "Deal {Damage} damage.\nFor each |Basic| cards in the library, {SelfName} deals {Value1} more damage."
+  Description: "Deal {Damage} damage.\nFor each |Basic| attack or \"Strike\" cards in the library, {SelfName} deals {Value1} more damage."
+  UpgradedDescription: "Deal {Damage} damage.\nFor each |Basic| attack or \"Strike\" cards in the library, {SelfName} deals {Value1} more damage."
   Name: Perfected Strike
+StSSwiftStrike:
+  Description: "Deal {Damage} damage."
+  UpgradedDescription: "Deal {Damage} damage."
+  Name: Swift Strike
+StSTrip:
+  Description: Apply {Value1} |Vulnerable|.
+  UpgradedDescription: Apply {Value1} |Vulnerable| to each enemy.
+  Name: Trip

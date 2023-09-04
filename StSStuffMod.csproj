@@ -316,19 +316,36 @@
       <None Remove="Resources\CardsEn.yaml" />
       <None Remove="Resources\ExhibitsEn.yaml" />
       <None Remove="Resources\StatusEffectsEn.yaml" />
+      <None Remove="Resources\StSAccuracy.png" />
+      <None Remove="Resources\StSAccuracySe.png" />
       <None Remove="Resources\StSAlchemize.png" />
+      <None Remove="Resources\StSBlind.png" />
+      <None Remove="Resources\StSBlueCandle.png" />
       <None Remove="Resources\StSBustedCrown.png" />
       <None Remove="Resources\StSCoffeeDripper.png" />
+      <None Remove="Resources\StSCultistHeadpiece.png" />
       <None Remove="Resources\StSCursedKey.png" />
       <None Remove="Resources\StSDramaticEntrance.png" />
       <None Remove="Resources\StSEctoplasm.png" />
       <None Remove="Resources\StSEntrench.png" />
+      <None Remove="Resources\StSExpertise.png" />
       <None Remove="Resources\StSFinesse.png" />
+      <None Remove="Resources\StSFlashofSteel.png" />
+      <None Remove="Resources\StSFootwork.png" />
       <None Remove="Resources\StSFusionHammer.png" />
       <None Remove="Resources\StSGoodInstincts.png" />
       <None Remove="Resources\StSLimitBreak.png" />
+      <None Remove="Resources\StSMayhem.png" />
+      <None Remove="Resources\StSMayhemSe.png" />
+      <None Remove="Resources\StSMedicalKit.png" />
       <None Remove="Resources\StSMindBlast.png" />
+      <None Remove="Resources\StSNecronomicon.png" />
+      <None Remove="Resources\StSNecronomicurse.png" />
+      <None Remove="Resources\StSNecronomicurseZUN.png" />
       <None Remove="Resources\StSPanacea.png" />
+      <None Remove="Resources\StSPanache.png" />
+      <None Remove="Resources\StSPanacheSe.png" />
+      <None Remove="Resources\StSPandorasBox.png" />
       <None Remove="Resources\StSPanicButton.png" />
       <None Remove="Resources\StSPanicButtonSe.png" />
       <None Remove="Resources\StSPerfectedStrike.png" />
@@ -337,6 +354,10 @@
       <None Remove="Resources\StSRunicPyramid.png" />
       <None Remove="Resources\StSSacredBark.png" />
       <None Remove="Resources\StSSneckoEye.png" />
+      <None Remove="Resources\StSSozu.png" />
+      <None Remove="Resources\StSSwiftStrike.png" />
+      <None Remove="Resources\StSTrip.png" />
+      <None Remove="Resources\StSVelvetChoker.png" />
     </ItemGroup>
 
 

@@ -17,6 +17,7 @@ using System.Threading;
 using LBoL.Core.StatusEffects;
 using static StSStuffMod.BepinexPlugin;
 using System.Linq;
+using LBoL.EntityLib.Exhibits.Common;
 
 namespace StSStuffMod
 {
@@ -62,7 +63,7 @@ namespace StSStuffMod
                Colors: new List<ManaColor>() { ManaColor.Red },
                IsXCost: false,
                Cost: new ManaGroup() { Any = 3 },
-               UpgradedCost: null,
+               UpgradedCost: new ManaGroup() { Any = 3 },
                MoneyCost: null,
                Damage: 10,
                UpgradedDamage: null,
@@ -70,8 +71,8 @@ namespace StSStuffMod
                UpgradedBlock: null,
                Shield: null,
                UpgradedShield: null,
-               Value1: 2,
-               UpgradedValue1: 3,
+               Value1: 3,
+               UpgradedValue1: 4,
                Value2: null,
                UpgradedValue2: null,
                Mana: null,
@@ -91,8 +92,8 @@ namespace StSStuffMod
                Keywords: Keyword.None,
                UpgradedKeywords: Keyword.None,
                EmptyDescription: false,
-               RelativeKeyword: Keyword.Basic,
-               UpgradedRelativeKeyword: Keyword.Basic,
+               RelativeKeyword: Keyword.None,
+               UpgradedRelativeKeyword: Keyword.None,
 
                RelativeEffects: new List<string>() { },
                UpgradedRelativeEffects: new List<string>() { },
@@ -116,7 +117,7 @@ namespace StSStuffMod
             {
                 if (base.GameRun != null)
                 {
-                    return base.GameRun.BaseDeck.Count((Card card) => card.IsBasic) * base.Value1;
+                    return base.GameRun.BaseDeck.Count((Card card) => (card.IsBasic && card.CardType == CardType.Attack) || card.Name.Contains("Strike")) * base.Value1;
                 }
                 return 0;
             }
