@@ -22,6 +22,10 @@ StSEctoplasm:
   Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer gain <sprite=\"Point\" name=\"Gold\">.\n{SelfName} can't be found after act 3."
   Name: Ectoplasm
   FlavorText: "This blob of slime and energy seems to pulse with life."
+StSFrozenEye:
+  Description: "Unlocks Actual Order of the draw pile."
+  Name: Frozen Eye
+  FlavorText: "Staring into the eye, you see a glimpse of your future."
 StSFusionHammer:
   Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nRemoves the ability to |Upgrade| at Gaps."
   Name: Fusion Hammer

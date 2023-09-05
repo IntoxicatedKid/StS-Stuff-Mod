@@ -30,7 +30,7 @@ using LBoL.Core.Units;
 using LBoL.EntityLib.Cards.Character.Cirno.Friend;
 using LBoL.EntityLib.Cards.Character.Reimu;
 using LBoL.EntityLib.Cards.Neutral.MultiColor;
-using static StSStuffMod.DayuuAbilityDef;
+
 using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;

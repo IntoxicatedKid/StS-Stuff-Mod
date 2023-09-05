@@ -7,7 +7,7 @@ namespace StSStuffMod
         // each loaded plugin needs to have a unique GUID. usually author+generalCategory+Name is good enough
         public const string GUID = "intoxicatedkid.stsstuffmod";
         public const string Name = "StS Stuff Mod";
-        public const string version = "1.0.3";
+        public const string version = "1.0.4";
         public static readonly Harmony harmony = new Harmony(GUID);
 
     }

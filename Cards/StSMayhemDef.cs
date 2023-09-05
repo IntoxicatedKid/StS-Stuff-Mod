@@ -27,8 +27,6 @@ using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
 using StSStuffMod;
-using static StSStuffMod.StSPanacheDef;
-using static StSStuffMod.StSMayhemDef;
 using LBoL.EntityLib.Cards.Character.Marisa;
 using LBoL.EntityLib.Cards.Neutral.Black;
 
@@ -152,7 +150,7 @@ namespace StSStuffMod
         {
             var statusEffectConfig = new StatusEffectConfig(
                 Id: "",
-                Order: 7,
+                Order: 11,
                 Type: StatusEffectType.Positive,
                 IsVerbose: false,
                 IsStackable: true,

@@ -27,7 +27,6 @@ using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
 using StSStuffMod;
-using static StSStuffMod.StSPanacheDef;
 
 namespace StSStuffMod
 {
