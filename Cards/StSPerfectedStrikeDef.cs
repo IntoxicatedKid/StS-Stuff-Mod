@@ -63,7 +63,7 @@ namespace StSStuffMod
                Colors: new List<ManaColor>() { ManaColor.Red },
                IsXCost: false,
                Cost: new ManaGroup() { Any = 2, Red = 1 },
-               UpgradedCost: new ManaGroup() { Any = 2, Red = 1 },
+               UpgradedCost: new ManaGroup() { Any = 3 },
                MoneyCost: null,
                Damage: 10,
                UpgradedDamage: null,

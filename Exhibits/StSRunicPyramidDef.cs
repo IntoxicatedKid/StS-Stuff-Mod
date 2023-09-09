@@ -98,12 +98,10 @@ namespace StSStuffMod
             }
             private IEnumerable<BattleAction> OnCardMoving(CardMovingEventArgs args)
             {
-                if (base.Battle.PlayerTurnShouldEnd)
+                if (args.Cause == ActionCause.TurnEnd)
                 {
-                    Card card = args.Card;
-                    if ((card.CardType != CardType.Misfortune) && (card.CardType != CardType.Status))
+                    if ((args.Card.CardType != CardType.Misfortune) && (args.Card.CardType != CardType.Status))
                     {
-                        base.NotifyActivating();
                         args.CancelBy(this);
                     }
                 }

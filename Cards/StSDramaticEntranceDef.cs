@@ -131,7 +131,7 @@ namespace StSStuffMod
         }
         private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
         {
-            if (this == base.Battle.EnumerateAllCards().First((Card card) => card is StSDramaticEntrance && card.IsUpgraded))
+            if (this == base.Battle.EnumerateAllCards().FirstOrDefault((Card card) => card is StSDramaticEntrance && card.IsUpgraded))
             {
                 List<Card> list = base.Battle.DrawZone.Where((Card card) => card is StSDramaticEntrance && card.IsUpgraded).ToList<Card>();
                 yield return new ExileManyCardAction(list);

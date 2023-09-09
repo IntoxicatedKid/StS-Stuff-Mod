@@ -27,6 +27,8 @@ using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
 using StSStuffMod;
+using static StSStuffMod.StSPanacheDef;
+using static StSStuffMod.StSMayhemDef;
 using LBoL.EntityLib.Cards.Character.Marisa;
 using LBoL.EntityLib.Cards.Neutral.Black;
 

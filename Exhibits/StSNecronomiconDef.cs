@@ -35,6 +35,7 @@ using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 using LBoL.EntityLib.Cards.Character.Marisa;
+using LBoL.EntityLib.StatusEffects.Neutral.TwoColor;
 
 namespace StSStuffMod
 {
@@ -93,6 +94,8 @@ namespace StSStuffMod
         [UsedImplicitly]
         public sealed class StSNecronomicon : Exhibit
         {
+            private bool Again = false;
+            private UnitSelector unitSelector;
             protected override void OnGain(PlayerUnit player)
             {
                 base.OnGain(player);
@@ -106,17 +109,31 @@ namespace StSStuffMod
                 {
                     base.Active = true;
                 });
-                base.ReactBattleEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
+                base.ReactBattleEvent<CardUsingEventArgs>(base.Battle.CardUsing, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsing));
+                base.ReactBattleEvent<CardMovingEventArgs>(base.Battle.CardMoving, new EventSequencedReactor<CardMovingEventArgs>(this.OnCardMoving));
             }
-            private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
+            private IEnumerable<BattleAction> OnCardUsing(CardUsingEventArgs args)
             {
-                if (base.Active && (args.Card.CardType == CardType.Attack) && (args.ConsumingMana.Amount >= base.Value2) && !base.Battle.BattleShouldEnd)
+                if (base.Active && (args.Card.CardType == CardType.Attack) && (args.ConsumingMana.Amount >= base.Value2))
                 {
                     base.NotifyActivating();
                     base.Active = false;
-                    args.ConsumingMana = new ManaGroup() { Any = 0 };
+                    this.Again = true;
+                    unitSelector = args.Selector;
+                }
+                yield break;
+            }
+            private IEnumerable<BattleAction> OnCardMoving(CardMovingEventArgs args)
+            {
+                if (!base.Battle.BattleShouldEnd && this.Again == true)
+                {
+                    this.Again = false;
+                    args.CancelBy(this);
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
-                    yield return new UseCardAction(args.Card, args.Selector, this.Mana);
+                    if (args.Card.Zone == CardZone.Hand)
+                    {
+                        yield return new UseCardAction(args.Card, unitSelector, this.Mana);
+                    }
                 }
                 yield break;
             }
