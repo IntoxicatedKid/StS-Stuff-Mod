@@ -72,7 +72,7 @@ namespace StSStuffMod
                 Appearance: AppearanceType.ShopOnly,
                 Owner: "",
                 LosableType: ExhibitLosableType.Losable,
-                Rarity: Rarity.Common,
+                Rarity: Rarity.Uncommon,
                 Value1: null,
                 Value2: null,
                 Value3: null,
@@ -97,18 +97,18 @@ namespace StSStuffMod
             {
                 base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
                 base.ReactBattleEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(this.OnCardsAddedToDrawZone));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
+                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnCardsAdded));
+                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(this.OnCardsAdded));
+                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(this.OnCardsAdded));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                List<Card> list = base.Battle.DrawZone.Where((Card card) => (card.CardType == CardType.Status) && card.IsForbidden).ToList<Card>();
-                if (list.Count > 0)
+                base.NotifyActivating();
+                foreach (Card card in base.Battle.EnumerateAllCards())
                 {
-                    base.NotifyActivating();
-                    foreach (Card card in list)
+                    if (card.CardType == CardType.Status && card.IsForbidden)
                     {
+                        card.NotifyChanged();
                         card.SetBaseCost(base.Mana);
                         card.IsExile = true;
                         card.IsForbidden = false;
@@ -121,24 +121,22 @@ namespace StSStuffMod
                 yield return this.StatusCardModify(args.Cards);
                 yield break;
             }
-            private IEnumerable<BattleAction> OnAddCard(CardsEventArgs args)
+            private IEnumerable<BattleAction> OnCardsAdded(CardsEventArgs args)
             {
                 yield return this.StatusCardModify(args.Cards);
                 yield break;
             }
             private BattleAction StatusCardModify(IEnumerable<Card> cards)
             {
-                List<Card> list = cards.Where((Card card) => (card.CardType == CardType.Status) && card.IsForbidden).ToList<Card>();
-                if (list.Count == 0)
+                foreach (Card card in cards)
                 {
-                    return null;
-                }
-                base.NotifyActivating();
-                foreach (Card card in list)
-                {
-                    card.SetBaseCost(base.Mana);
-                    card.IsExile = true;
-                    card.IsForbidden = false;
+                    if (card.CardType == CardType.Status && card.IsForbidden)
+                    {
+                        card.NotifyChanged();
+                        card.SetBaseCost(base.Mana);
+                        card.IsExile = true;
+                        card.IsForbidden = false;
+                    }
                 }
                 return null;
             }

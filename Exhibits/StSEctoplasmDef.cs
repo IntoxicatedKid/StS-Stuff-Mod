@@ -70,7 +70,7 @@ namespace StSStuffMod
                 Index: sequenceTable.Next(typeof(ExhibitConfig)),
                 Id: "",
                 Order: 10,
-                IsDebug: true,
+                IsDebug: false,
                 IsPooled: false,
                 IsSentinel: false,
                 Revealable: false,

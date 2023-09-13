@@ -152,7 +152,7 @@ namespace StSStuffMod
         {
             var statusEffectConfig = new StatusEffectConfig(
                 Id: "",
-                Order: 11,
+                Order: 10,
                 Type: StatusEffectType.Positive,
                 IsVerbose: false,
                 IsStackable: true,
@@ -216,7 +216,6 @@ namespace StSStuffMod
                     if (list.Count > 0)
                     {
                         Card card = list.First();
-                        card.SetTurnCost(new ManaGroup() { Any = 0 });
                         yield return new MoveCardAction(card, CardZone.Hand);
                         if (((card.CardType == CardType.Misfortune) || (card.CardType == CardType.Status)) && card.IsForbidden)
                         {

@@ -2,6 +2,22 @@ StSAccuracySe:
     Brief: "Damage of |Throwing Knives| are increased."
     Description: "|Throwing Knives| deal {Level} more damage."
     Name: Accuracy
+StSAmplifySe:
+    Brief: "Ability cards played twice."
+    Description: "The next {Level:plural one='ability card' other='% ability cards'} played twice."
+    Name: Amplify
+StSBurstSe:
+    Brief: "Defense or skill cards played twice."
+    Description: "The next {Level:plural one='defense or skill card' other='% defense or skill cards'} played twice."
+    Name: Burst
+StSDoubleTapSe:
+    Brief: "Attack cards played twice."
+    Description: "The next {Level:plural one='attack card' other='% attack cards'} played twice."
+    Name: Double Tap
+StSEchoFormSe:
+    Brief: "Cards played twice each turn."
+    Description: "At the start of {OwnerName}'s turn, the next {Level:plural one='card' other='% cards'} played twice.\n{Count} card{Count:plural one='' other='s'} left."
+    Name: Echo Form
 StSMayhemSe:
     Brief: "At the start of {PlayerName}'s turn, put the top card of the draw pile into the hand. Then, play that card."
     Description: "At the start of {OwnerName}'s turn, place {Level} card{Level:plural one='' other='s'} on top of the draw pile into the hand. Then, play that card."
@@ -14,3 +30,7 @@ StSPanicButtonSe:
     Brief: "Can't gain |Block| or |Barrier| from cards."
     Description: "{OwnerName} can't gain |Block| or |Barrier| from cards for {Duration} turn{Duration:plural one='' other='s'}."
     Name: Panic Button
+StSTheBombSe:
+    Brief: "When removed, deal damage to each enemy."
+    Description: "When removed, deal {Count} damage to each enemy."
+    Name: The Bomb

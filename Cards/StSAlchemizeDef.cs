@@ -62,7 +62,7 @@ namespace StSStuffMod
                TargetType: TargetType.Self,
                Colors: new List<ManaColor>() { ManaColor.Colorless },
                IsXCost: false,
-               Cost: new ManaGroup() { Any = 1, Colorless = 1 },
+               Cost: new ManaGroup() { Colorless = 2 },
                UpgradedCost: new ManaGroup() { Any = 0 },
                MoneyCost: null,
                Damage: null,

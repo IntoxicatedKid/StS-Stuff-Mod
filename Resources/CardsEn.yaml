@@ -6,14 +6,46 @@ StSAlchemize:
   Description: "Add a random |Tool| card to the library."
   UpgradedDescription: "Add a random |Tool| card to the library."
   Name: Alchemize
+StSAmplify:
+  Description: "The next {Value1} ability {Value1:plural one='card' other='cards'} played twice."
+  UpgradedDescription: "The next {Value1} ability {Value1:plural one='card' other='cards'} played twice."
+  Name: Amplify
+StSBandageUp:
+  Description: Gain {Value1} life.
+  UpgradedDescription: Gain {Value1} life.
+  Name: Bandage Up
 StSBlind:
   Description: Apply {Value1} |Weak|.
   UpgradedDescription: Apply {Value1} |Weak| to each enemy.
   Name: Blind
+StSBurst:
+  Description: "The next {Value1} defense or skill {Value1:plural one='card' other='cards'} played twice."
+  UpgradedDescription: "The next {Value1} defense or skill {Value1:plural one='card' other='cards'} played twice."
+  Name: Burst
+StSCaltrops:
+  Description: "Gain {Value1} |Static Charge|."
+  UpgradedDescription: "Gain {Value1} |Static Charge|."
+  Name: Caltrops
+StSDeepBreath:
+  Description: "Shuffle the discard pile into the draw pile.\nDraw {Value1:plural one='% card' other='% cards'}."
+  UpgradedDescription: "Shuffle the discard pile into the draw pile.\nDraw {Value1:plural one='% card' other='% cards'}."
+  Name: Deep Breath
 StSDramaticEntrance:
   Description: "Deal {Damage} damage to each enemy."
-  UpgradedDescription: "|At the start of combat|: |Exile| {SelfName}, Deal {Value1} damage to each enemy."
+  UpgradedDescription: "Deal {Damage} damage to each enemy.\n|At the start of combat|:\n|Exile| {SelfName}, Deal {Value1} damage to each enemy."
   Name: Dramatic Entrance
+StSDoubleTap:
+  Description: "The next {Value1} attack {Value1:plural one='card' other='cards'} played twice."
+  UpgradedDescription: "The next {Value1} attack {Value1:plural one='card' other='cards'} played twice."
+  Name: Double Tap
+StSEchoForm:
+  Description: "At the start of {PlayerName}'s turn, the next {Value1} {Value1:plural one='card' other='cards'} played twice."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, the next {Value1} {Value1:plural one='card' other='cards'} played twice."
+  Name: Echo Form
+StSEnlightenment:
+  Description: "All cards in the hand |temporarily costs| {Mana}.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
+  UpgradedDescription: "All cards in the hand |costs| {Mana}.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
+  Name: Enlightenment
 StSEntrench:
   Description: "Double the current |Block|."
   UpgradedDescription: "Double the current |Block| and |Barrier|."
@@ -42,6 +74,14 @@ StSLimitBreak:
   Description: Double the current |Firepower| and |Temporary Firepower|.
   UpgradedDescription: Double the current |Firepower| and |Temporary Firepower|.
   Name: Limit Break
+StSMadness:
+  Description: "A random card in the hand |costs| {Mana} this combat.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
+  UpgradedDescription: "A random card in the hand |costs| {Mana} this combat.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
+  Name: Madness
+StSMasterofStrategy:
+  Description: "Draw {Value1:plural one='% card' other='% cards'}."
+  UpgradedDescription: "Draw {Value1:plural one='% card' other='% cards'}."
+  Name: Master of Strategy
 StSMayhem:
   Description: "At the start of {PlayerName}'s turn, put the top card of the draw pile into the hand. Then, play that card."
   UpgradedDescription: "At the start of {PlayerName}'s turn, put the top card of the draw pile into the hand. Then, play that card."
@@ -71,10 +111,18 @@ StSPerfectedStrike:
   Description: "Deal {Damage} damage.\nFor each |Basic| attack or \"Strike\" cards in the library, {SelfName} deals {Value1} more damage."
   UpgradedDescription: "Deal {Damage} damage.\nFor each |Basic| attack or \"Strike\" cards in the library, {SelfName} deals {Value1} more damage."
   Name: Perfected Strike
+StSPurity:
+  Description: "|Exile| up to {Value1} cards from the hand."
+  UpgradedDescription: "|Exile| up to {Value1} cards from the hand."
+  Name: Purity
 StSSwiftStrike:
   Description: "Deal {Damage} damage."
   UpgradedDescription: "Deal {Damage} damage."
   Name: Swift Strike
+StSTheBomb:
+  Description: "At the end of {PlayerName}'s third turn, deal {Value1} damage to each enemy."
+  UpgradedDescription: "At the end of {PlayerName}'s third turn, deal {Value1} damage to each enemy."
+  Name: The Bomb
 StSTrip:
   Description: Apply {Value1} |Vulnerable|.
   UpgradedDescription: Apply {Value1} |Vulnerable| to each enemy.

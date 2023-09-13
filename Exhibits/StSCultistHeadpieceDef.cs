@@ -68,7 +68,7 @@ namespace StSStuffMod
                 IsPooled: true,
                 IsSentinel: false,
                 Revealable: false,
-                Appearance: AppearanceType.Anywhere,
+                Appearance: AppearanceType.NonShop,
                 Owner: "",
                 LosableType: ExhibitLosableType.Losable,
                 Rarity: Rarity.Common,
@@ -102,52 +102,17 @@ namespace StSStuffMod
                 yield return PerformAction.Chat(base.Battle.Player, "CAW!\nCAAAW", 2f, 0f, 0f, true);
                 yield return PerformAction.Sfx("Raven", 0f);
                 yield return PerformAction.Sfx("Raven", 0f);
-                yield return PerformAction.Sfx("Raven", 0.4f);
+                yield return PerformAction.Sfx("Raven", 0.5f);
                 yield return PerformAction.Sfx("Raven", 0f);
                 foreach (EnemyUnit enemyUnit in base.Battle.EnemyGroup)
                 {
                     if (enemyUnit.IsAlive)
                     {
                         yield return new ApplyStatusEffectAction<TempFirepowerNegative>(enemyUnit, new int?(base.Value1), null, null, null, 0f, true);
-                        if (enemyUnit is Doremy)
-                        {
-                            yield return new DamageAction(base.Owner, enemyUnit, DamageInfo.HpLose((float)base.Value1), "Instant", GunType.Single);
-                            enemyUnit._turnMoves.Clear();
-                            enemyUnit.ClearIntentions();
-                            var stun = Intention.Stun();
-                            stun.Source = enemyUnit;
-                            enemyUnit._turnMoves.Add(new SimpleEnemyMove(stun, new EnemyMoveAction[] { new EnemyMoveAction(enemyUnit, "Unsatisfied", true) }));
-                            enemyUnit.Intentions.Add(stun);
-                            enemyUnit.NotifyIntentionsChanged();
-                        }
                     }
                 }
                 yield break;
             }
-            /*private IEnumerable<BattleAction> OnPlayerTurnStarted(GameEventArgs args)
-            {
-                if (base.Battle.Player.TurnCounter == 1)
-                {
-                    base.NotifyActivating();
-                    yield return PerformAction.Chat(base.Battle.Player, "CAW!\nCAAAW", 3f, 0f, 0f, true);
-                    yield return PerformAction.Sfx("Raven", 0f);
-                    yield return PerformAction.Sfx("Raven", 0f);
-                    yield return PerformAction.Sfx("Raven", 0.4f);
-                    yield return PerformAction.Sfx("Raven", 0f);
-                    foreach (EnemyUnit enemyUnit in base.Battle.EnemyGroup)
-                    {
-                        if (enemyUnit.IsAlive)
-                        {
-                            yield return new ApplyStatusEffectAction<TempFirepowerNegative>(enemyUnit, new int?(base.Value1), null, null, null, 0f, true);
-                            if (enemyUnit is Doremy)
-                            {
-                                yield return new DamageAction(base.Owner, enemyUnit, DamageInfo.HpLose((float)base.Value1), "Instant", GunType.Single);
-                            }
-                        }
-                    }
-                }
-                yield break;
-            }*/
         }
     }
 }

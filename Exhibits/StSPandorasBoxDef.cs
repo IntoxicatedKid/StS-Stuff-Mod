@@ -34,6 +34,7 @@ using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 using LBoL.EntityLib.Exhibits.Shining;
+using LBoL.EntityLib.Exhibits.Common;
 
 namespace StSStuffMod
 {
@@ -90,11 +91,12 @@ namespace StSStuffMod
         }
         [EntityLogic(typeof(StSPandorasBoxDef))]
         [UsedImplicitly]
+        [ExhibitInfo(WeighterType = typeof(StSPandorasBox.StSPandorasBoxWeighter))]
         public sealed class StSPandorasBox : Exhibit
         {
             protected override void OnGain(PlayerUnit player)
             {
-                List<Card> list = base.GameRun.BaseDeckWithOutUnremovable.Where((Card c) => c.IsBasic).ToList<Card>();
+                List<Card> list = base.GameRun.BaseDeckWithOutUnremovable.Where((Card card) => card.IsBasic).ToList<Card>();
                 if (list.Count > 0)
                 {
                     base.GameRun.RemoveDeckCards(list, false);

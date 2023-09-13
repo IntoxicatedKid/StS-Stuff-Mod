@@ -107,6 +107,7 @@ namespace StSStuffMod
                 {
                     if (card.CardType == CardType.Tool)
                     {
+                        card.NotifyChanged();
                         card.IsForbidden = true;
                     }
                 }
@@ -135,6 +136,7 @@ namespace StSStuffMod
                 {
                     if (card.CardType == CardType.Tool)
                     {
+                        card.NotifyChanged();
                         card.IsForbidden = true;
                     }
                 }

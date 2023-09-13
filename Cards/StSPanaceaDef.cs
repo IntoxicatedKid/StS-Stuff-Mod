@@ -114,6 +114,7 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
+            yield return base.DefenseAction(true);
             yield return new RemoveAllNegativeStatusEffectAction(base.Battle.Player);
             yield return base.BuffAction<Amulet>(base.Value1, 0, 0, 0, 0.2f);
             yield break;
