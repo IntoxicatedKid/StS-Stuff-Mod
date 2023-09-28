@@ -30,7 +30,6 @@ using LBoL.Core.Units;
 using LBoL.EntityLib.Cards.Character.Cirno.Friend;
 using LBoL.EntityLib.Cards.Character.Reimu;
 using LBoL.EntityLib.Cards.Neutral.MultiColor;
-
 using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
@@ -40,8 +39,10 @@ using LBoL.EntityLib.EnemyUnits.Character;
 using HarmonyLib;
 using LBoL.EntityLib.EnemyUnits.Normal;
 using System.Runtime.CompilerServices;
+using LBoL.Core.GapOptions;
+using System.Reflection.Emit;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSEctoplasmDef : ExhibitTemplate
     {
@@ -60,7 +61,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -78,7 +79,7 @@ namespace StSStuffMod
                 Owner: "",
                 LosableType: ExhibitLosableType.CantLose,
                 Rarity: Rarity.Shining,
-                Value1: null,
+                Value1: 0,
                 Value2: null,
                 Value3: null,
                 Mana: null,
@@ -89,7 +90,7 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -99,13 +100,6 @@ namespace StSStuffMod
         [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 0)]
         public sealed class StSEctoplasm : ShiningExhibit
         {
-            protected override void OnAdded(PlayerUnit player)
-            {
-                base.HandleGameRunEvent<GameEventArgs>(base.GameRun.MoneyGained, delegate (GameEventArgs _)
-                {
-                    base.NotifyActivating();
-                });
-            }
             [HarmonyPatch(typeof(GameRunController), nameof(GameRunController.InternalGainMoney))]
             class GameRunController_InternalGainMoney_Patch
             {
@@ -117,6 +111,27 @@ namespace StSStuffMod
                     }
                     return true;
                 }
+            }
+            [HarmonyPatch(typeof(GapStation), nameof(GapStation.OnEnter))]
+            class GapStation_OnEnter_Patch
+            {
+                static void Postfix(GapStation __instance)
+                {
+                    if (GameMaster.Instance.CurrentGameRun.Player.HasExhibit<StSEctoplasm>())
+                    {
+                        if (__instance.GapOptions.FirstOrDefault((gapOption) => gapOption.Type == GapOptionType.UpgradeCard) is UpgradeCard upgradeOption)
+                        {
+                            upgradeOption.Price = 0;
+                        }
+                    }
+                }
+            }
+            protected override void OnAdded(PlayerUnit player)
+            {
+                HandleGameRunEvent(GameRun.MoneyGained, delegate (GameEventArgs _)
+                {
+                    NotifyActivating();
+                });
             }
         }
     }

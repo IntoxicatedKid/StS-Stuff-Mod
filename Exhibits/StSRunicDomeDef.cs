@@ -36,7 +36,7 @@ using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSRunicDomeDef : ExhibitTemplate
     {
@@ -55,7 +55,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -84,7 +84,6 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -96,11 +95,11 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.RoundStarted, new EventSequencedReactor<GameEventArgs>(this.OnRoundStarted));
+                ReactBattleEvent(Battle.RoundStarted, new EventSequencedReactor<GameEventArgs>(OnRoundStarted));
             }
             private IEnumerable<BattleAction> OnRoundStarted(GameEventArgs args)
             {
-                foreach (var enemy in base.Battle.AllAliveEnemies)
+                foreach (var enemy in Battle.AllAliveEnemies)
                 {
                     enemy.ClearIntentions();
                 }

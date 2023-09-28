@@ -25,7 +25,7 @@ using LBoL.Base.Extensions;
 using System.Linq;
 using UnityEngine;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSFinesseDef : CardTemplate
     {
@@ -119,8 +119,8 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.DefenseAction(true);
-            yield return new DrawManyCardAction(base.Value1);
+            yield return DefenseAction(true);
+            yield return new DrawManyCardAction(Value1);
             yield break;
         }
     }

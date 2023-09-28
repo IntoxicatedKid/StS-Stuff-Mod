@@ -25,7 +25,7 @@ using LBoL.Base.Extensions;
 using System.Linq;
 using UnityEngine;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSBlindDef : CardTemplate
     {
@@ -119,13 +119,13 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            if (!this.IsUpgraded)
+            if (!IsUpgraded)
             {
-                yield return base.DebuffAction<Weak>(selector.SelectedEnemy, 0, base.Value1, 0, 0, true, 0.2f);
+                yield return DebuffAction<Weak>(selector.SelectedEnemy, 0, Value1, 0, 0, true, 0.2f);
             }
             else
             {
-                foreach (BattleAction battleAction in base.DebuffAction<Weak>(base.Battle.AllAliveEnemies, 0, base.Value1, 0, 0, true, 0.1f))
+                foreach (BattleAction battleAction in DebuffAction<Weak>(Battle.AllAliveEnemies, 0, Value1, 0, 0, true, 0.1f))
                 {
                     yield return battleAction;
                 }

@@ -298,7 +298,10 @@
         </Reference>
         <Reference Include="UniTask">
             <HintPath>$(GameFolder)\LBoL_Data\Managed\UniTask.dll</HintPath>
-        </Reference>        
+        </Reference>
+        <Reference Include="YarnSpinner">
+            <HintPath>$(GameFolder)\LBoL_Data\Managed\YarnSpinner.dll</HintPath>
+        </Reference> 
     </ItemGroup>
 
 
@@ -328,6 +331,9 @@
       <None Remove="Resources\StSBurstSe.png" />
       <None Remove="Resources\StSBustedCrown.png" />
       <None Remove="Resources\StSCaltrops.png" />
+      <None Remove="Resources\StSCauldron.png" />
+      <None Remove="Resources\StSChargeBattery.png" />
+      <None Remove="Resources\StSClash.png" />
       <None Remove="Resources\StSCoffeeDripper.png" />
       <None Remove="Resources\StSCultistHeadpiece.png" />
       <None Remove="Resources\StSCursedKey.png" />
@@ -338,17 +344,23 @@
       <None Remove="Resources\StSEchoForm.png" />
       <None Remove="Resources\StSEchoFormSe.png" />
       <None Remove="Resources\StSEctoplasm.png" />
+      <None Remove="Resources\StSEnchiridion.png" />
       <None Remove="Resources\StSEnlightenment.png" />
       <None Remove="Resources\StSEntrench.png" />
       <None Remove="Resources\StSExpertise.png" />
+      <None Remove="Resources\StSFaceOfCleric.png" />
       <None Remove="Resources\StSFinesse.png" />
       <None Remove="Resources\StSFlashofSteel.png" />
       <None Remove="Resources\StSFootwork.png" />
       <None Remove="Resources\StSFrozenEye.png" />
       <None Remove="Resources\StSFusionHammer.png" />
       <None Remove="Resources\StSGoodInstincts.png" />
+      <None Remove="Resources\StSImpatience.png" />
+      <None Remove="Resources\StSJackofAllTrades.png" />
       <None Remove="Resources\StSLimitBreak.png" />
       <None Remove="Resources\StSMadness.png" />
+      <None Remove="Resources\StSMagnetism.png" />
+      <None Remove="Resources\StSMagnetismSe.png" />
       <None Remove="Resources\StSMasterofStrategy.png" />
       <None Remove="Resources\StSMayhem.png" />
       <None Remove="Resources\StSMayhemSe.png" />
@@ -358,7 +370,11 @@
       <None Remove="Resources\StSNecronomicurse.png" />
       <None Remove="Resources\StSNecronomicurseZUN.png" />
       <None Remove="Resources\StSNeowsLament.png" />
+      <None Remove="Resources\StSNilrysCodex.png" />
       <None Remove="Resources\StSNlothsGift.png" />
+      <None Remove="Resources\StSOrangePellets.png" />
+      <None Remove="Resources\StSOrrery.png" />
+      <None Remove="Resources\StSOverclock.png" />
       <None Remove="Resources\StSPanacea.png" />
       <None Remove="Resources\StSPanache.png" />
       <None Remove="Resources\StSPanacheSe.png" />
@@ -368,11 +384,15 @@
       <None Remove="Resources\StSPerfectedStrike.png" />
       <None Remove="Resources\StSPhilosophersStone.png" />
       <None Remove="Resources\StSPurity.png" />
+      <None Remove="Resources\StSRecycle.png" />
+      <None Remove="Resources\StSReinforcedBody.png" />
       <None Remove="Resources\StSRunicDome.png" />
       <None Remove="Resources\StSRunicPyramid.png" />
       <None Remove="Resources\StSSacredBark.png" />
       <None Remove="Resources\StSSneckoEye.png" />
       <None Remove="Resources\StSSozu.png" />
+      <None Remove="Resources\StSSsserpentHead.png" />
+      <None Remove="Resources\StSStrangeSpoon.png" />
       <None Remove="Resources\StSSwiftStrike.png" />
       <None Remove="Resources\StSTheBomb.png" />
       <None Remove="Resources\StSTheBombSe.png" />
@@ -380,7 +400,9 @@
       <None Remove="Resources\StSToolbox.png" />
       <None Remove="Resources\StSTorii.png" />
       <None Remove="Resources\StSTrip.png" />
+      <None Remove="Resources\StSTURBO.png" />
       <None Remove="Resources\StSVelvetChoker.png" />
+      <None Remove="Resources\StSWristBlade.png" />
     </ItemGroup>
 
 

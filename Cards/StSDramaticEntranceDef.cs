@@ -21,7 +21,7 @@ using LBoL.EntityLib.StatusEffects.Cirno;
 using LBoL.EntityLib.StatusEffects.Others;
 using static StSStuffMod.BepinexPlugin;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSDramaticEntranceDef : CardTemplate
     {
@@ -67,13 +67,13 @@ namespace StSStuffMod
                Cost: new ManaGroup() { Any = 0 },
                UpgradedCost: null,
                MoneyCost: null,
-               Damage: 22,
-               UpgradedDamage: 24,
+               Damage: 20,
+               UpgradedDamage: 25,
                Block: null,
                UpgradedBlock: null,
                Shield: null,
                UpgradedShield: null,
-               Value1: 24,
+               Value1: null,
                UpgradedValue1: null,
                Value2: null,
                UpgradedValue2: null,
@@ -115,15 +115,15 @@ namespace StSStuffMod
     {
         protected override void OnEnterBattle(BattleController battle)
         {
-            base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
+            ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
         }
         private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
         {
-            if (this == base.Battle.EnumerateAllCards().FirstOrDefault((Card card) => card is StSDramaticEntrance && card.IsUpgraded))
+            if (this == Battle.EnumerateAllCards().FirstOrDefault((card) => card is StSDramaticEntrance && card.IsUpgraded))
             {
-                List<Card> list = base.Battle.DrawZone.Where((Card card) => card is StSDramaticEntrance && card.IsUpgraded).ToList<Card>();
+                List<Card> list = Battle.DrawZone.Where((card) => card is StSDramaticEntrance && card.IsUpgraded).ToList();
                 yield return new ExileManyCardAction(list);
-                yield return new DamageAction(base.Battle.Player, base.Battle.AllAliveEnemies, DamageInfo.Attack(list.Sum((Card card) => card.Value1)), "StarPasNoAni", GunType.Single);
+                yield return new DamageAction(Battle.Player, Battle.AllAliveEnemies, DamageInfo.Attack(list.Sum((card) => card.Damage.Amount)), "StarPasNoAni", GunType.Single);
             }
             yield break;
         }

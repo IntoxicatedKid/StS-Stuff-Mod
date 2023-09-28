@@ -25,7 +25,7 @@ using LBoL.Base.Extensions;
 using System.Linq;
 using UnityEngine;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSTheBombDef : CardTemplate
     {
@@ -119,7 +119,7 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.BuffAction<StSTheBombSeDef.StSTheBombSe>(0, 3, 0, base.Value1, 0.2f);
+            yield return BuffAction<StSTheBombSeDef.StSTheBombSe>(0, 3, 0, Value1, 0.2f);
             yield break;
         }
     }
@@ -172,9 +172,9 @@ namespace StSStuffMod
         {
             protected override void OnRemoved(Unit unit)
             {
-                if (!base.Battle.BattleShouldEnd)
+                if (!Battle.BattleShouldEnd)
                 {
-                    this.React(new DamageAction(base.Owner, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)base.Count), "ExhTNT", GunType.Single));
+                    React(new DamageAction(Owner, Battle.EnemyGroup.Alives, DamageInfo.Reaction(Count), "ExhTNT", GunType.Single));
                 }
             }
         }

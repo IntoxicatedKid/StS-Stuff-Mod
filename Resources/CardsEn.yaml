@@ -26,13 +26,21 @@ StSCaltrops:
   Description: "Gain {Value1} |Static Charge|."
   UpgradedDescription: "Gain {Value1} |Static Charge|."
   Name: Caltrops
+StSChargeBattery:
+  Description: "Gain {Block} |Block|.\nGain {Mana} at the start of the next turn."
+  UpgradedDescription: "Gain {Block} |Block|.\nGain {Mana} at the start of the next turn."
+  Name: Charge Battery
+StSClash:
+  Description: "Deal {Damage} damage.\nCan only be played if every card in the hand is an attack card."
+  UpgradedDescription: "Deal {Damage} damage.\nCan only be played if every card in the hand is an attack card."
+  Name: Clash
 StSDeepBreath:
   Description: "Shuffle the discard pile into the draw pile.\nDraw {Value1:plural one='% card' other='% cards'}."
   UpgradedDescription: "Shuffle the discard pile into the draw pile.\nDraw {Value1:plural one='% card' other='% cards'}."
   Name: Deep Breath
 StSDramaticEntrance:
   Description: "Deal {Damage} damage to each enemy."
-  UpgradedDescription: "Deal {Damage} damage to each enemy.\n|At the start of combat|:\n|Exile| {SelfName}, Deal {Value1} damage to each enemy."
+  UpgradedDescription: "Deal {Damage} damage to each enemy.\n|At the start of combat|: |Exile| {SelfName}, Deal {Damage} damage to each enemy."
   Name: Dramatic Entrance
 StSDoubleTap:
   Description: "The next {Value1} attack {Value1:plural one='card' other='cards'} played twice."
@@ -43,8 +51,8 @@ StSEchoForm:
   UpgradedDescription: "At the start of {PlayerName}'s turn, the next {Value1} {Value1:plural one='card' other='cards'} played twice."
   Name: Echo Form
 StSEnlightenment:
-  Description: "All cards in the hand |temporarily costs| {Mana}.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
-  UpgradedDescription: "All cards in the hand |costs| {Mana}.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
+  Description: "All cards in the hand |temporarily costs| {Mana}."
+  UpgradedDescription: "All cards in the hand |costs| {Mana}."
   Name: Enlightenment
 StSEntrench:
   Description: "Double the current |Block|."
@@ -70,14 +78,26 @@ StSGoodInstincts:
   Description: Gain {Block} |Block|.
   UpgradedDescription: Gain {Block} |Block|.
   Name: Good Instincts
+StSImpatience:
+  Description: "If there are no attack cards in hand, draw {Value1:plural one='% card' other='% cards'}."
+  UpgradedDescription: "If there are no attack cards in hand, draw {Value1:plural one='% card' other='% cards'}."
+  Name: StS Impatience
+StSJackofAllTrades:
+  Description: "Add {Value1} random colorless card{Value1:plural one='' other='s'} to the hand. Mana of any color can be spent to pay their mana costs."
+  UpgradedDescription: "Add {Value1} random colorless card{Value1:plural one='' other='s'} to the hand. Mana of any color can be spent to pay their mana costs."
+  Name: Jack of All Trades
 StSLimitBreak:
   Description: Double the current |Firepower| and |Temporary Firepower|.
   UpgradedDescription: Double the current |Firepower| and |Temporary Firepower|.
   Name: Limit Break
 StSMadness:
-  Description: "A random card in the hand |costs| {Mana} this combat.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
-  UpgradedDescription: "A random card in the hand |costs| {Mana} this combat.\nCards with <sprite=\"ManaSprite\" name=\"0\"> cost are unaffected."
+  Description: "A random card in the hand |costs| {Mana} this combat."
+  UpgradedDescription: "A random card in the hand |costs| {Mana} this combat."
   Name: Madness
+StSMagnetism:
+  Description: "At the start of {PlayerName}'s turn, add a random colorless card to the hand. It has |Exile| and |Ethereal|."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, add a random colorless card to the hand. It has |Exile| and |Ethereal|."
+  Name: Magnetism
 StSMasterofStrategy:
   Description: "Draw {Value1:plural one='% card' other='% cards'}."
   UpgradedDescription: "Draw {Value1:plural one='% card' other='% cards'}."
@@ -95,6 +115,10 @@ StSMindBlast:
 StSNecronomicurse:
   Description: "|When Exiled|: Return {SelfName} from the exile pile to the hand."
   Name: Necronomicurse
+StSOverclock:
+  Description: "Draw cards until the hand is full.\nAdd a |Refracted Sunlight| to the discard pile for each {Value1:plural one='% card' other='% cards'} drawn this way."
+  UpgradedDescription: "Draw cards until the hand is full.\nAdd a |Refracted Sunlight| to the discard pile for each {Value1:plural one='% card' other='% cards'} drawn this way."
+  Name: Overclock
 StSPanacea:
   Description: "Remove all debuffs from {PlayerName}.\nGain {Value1} |Amulet|."
   UpgradedDescription: "Remove all debuffs from {PlayerName}.\nGain {Value1} |Amulet|."
@@ -115,6 +139,14 @@ StSPurity:
   Description: "|Exile| up to {Value1} cards from the hand."
   UpgradedDescription: "|Exile| up to {Value1} cards from the hand."
   Name: Purity
+StSRecycle:
+  Description: "|Exile| a card from the hand. Gain mana equal to that card's cost."
+  UpgradedDescription: "|Exile| a card from the hand. Gain mana equal to that card's cost."
+  Name: Recycle
+StSReinforcedBody:
+  Description: "|For each {Mana} spent|: Gain {Block} |Block|."
+  UpgradedDescription: "|For each {Mana} spent|: Gain {Block} |Block|."
+  Name: Reinforced Body
 StSSwiftStrike:
   Description: "Deal {Damage} damage."
   UpgradedDescription: "Deal {Damage} damage."
@@ -127,3 +159,7 @@ StSTrip:
   Description: Apply {Value1} |Vulnerable|.
   UpgradedDescription: Apply {Value1} |Vulnerable| to each enemy.
   Name: Trip
+StSTURBO:
+  Description: "Gain {Mana}.\nAdd a |Quiet Moonlight| to the discard pile."
+  UpgradedDescription: "Gain {Mana}.\nAdd a |Quiet Moonlight| to the discard pile."
+  Name: TURBO

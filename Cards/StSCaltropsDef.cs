@@ -26,11 +26,10 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
-using StSStuffMod;
-using static StSStuffMod.StSPanacheDef;
+using static StSStuffMod.Cards.StSPanacheDef;
 using LBoL.EntityLib.StatusEffects.Basic;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSCaltropsDef : CardTemplate
     {
@@ -71,7 +70,7 @@ namespace StSStuffMod
                 TargetType: TargetType.Self,
                 Colors: new List<ManaColor>() { ManaColor.White, ManaColor.Red },
                 IsXCost: false,
-                Cost: new ManaGroup() { Any = 1, White = 1, Red = 1 },
+                Cost: new ManaGroup() { White = 1, Red = 1 },
                 UpgradedCost: null,
                 MoneyCost: null,
                 Damage: null,
@@ -122,7 +121,7 @@ namespace StSStuffMod
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.BuffAction<Electric>(base.Value1, 0, 0, 0, 0.2f);
+                yield return BuffAction<Electric>(Value1, 0, 0, 0, 0.2f);
                 yield break;
             }
         }

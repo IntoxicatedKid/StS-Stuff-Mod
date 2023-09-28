@@ -35,7 +35,7 @@ using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 using LBoL.EntityLib.Cards.Character.Marisa;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSSozuDef : ExhibitTemplate
     {
@@ -54,7 +54,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -83,7 +83,7 @@ namespace StSStuffMod
                 InitialCounter: 0,
                 Keywords: Keyword.Forbidden,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -94,16 +94,16 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
-                base.ReactBattleEvent<UnitEventArgs>(base.Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(this.OnOwnerTurnStarted));
-                base.ReactBattleEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(this.OnCardsAddedToDrawZone));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
+                ReactBattleEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
+                ReactBattleEvent(Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(OnCardsAddedToDrawZone));
+                ReactBattleEvent(Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(OnAddCard));
+                ReactBattleEvent(Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(OnAddCard));
+                ReactBattleEvent(Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(OnAddCard));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                foreach (Card card in base.Battle.EnumerateAllCards())
+                foreach (Card card in Battle.EnumerateAllCards())
                 {
                     if (card.CardType == CardType.Tool)
                     {
@@ -115,19 +115,19 @@ namespace StSStuffMod
             }
             private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
             {
-                base.NotifyActivating();
-                ManaGroup manaGroup = ManaGroup.Single(ManaColors.Colors.Sample(base.GameRun.BattleRng));
+                NotifyActivating();
+                ManaGroup manaGroup = ManaGroup.Single(ManaColors.Colors.Sample(GameRun.BattleRng));
                 yield return new GainManaAction(manaGroup);
                 yield break;
             }
             private IEnumerable<BattleAction> OnCardsAddedToDrawZone(CardsAddingToDrawZoneEventArgs args)
             {
-                yield return this.ToolCardModify(args.Cards);
+                yield return ToolCardModify(args.Cards);
                 yield break;
             }
             private IEnumerable<BattleAction> OnAddCard(CardsEventArgs args)
             {
-                yield return this.ToolCardModify(args.Cards);
+                yield return ToolCardModify(args.Cards);
                 yield break;
             }
             private BattleAction ToolCardModify(IEnumerable<Card> cards)

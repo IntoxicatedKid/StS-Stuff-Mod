@@ -20,7 +20,7 @@ using LBoL.Core.Randoms;
 using static StSStuffMod.BepinexPlugin;
 using LBoL.EntityLib.StatusEffects.Basic;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSBandageUpDef : CardTemplate
     {
@@ -58,7 +58,7 @@ namespace StSStuffMod
                IsPooled: true,
                HideMesuem: false,
                IsUpgradable: true,
-               Rarity: Rarity.Uncommon,
+               Rarity: Rarity.Common,
                Type: CardType.Skill,
                TargetType: TargetType.Self,
                Colors: new List<ManaColor>() { ManaColor.Colorless },
@@ -114,8 +114,7 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.DefenseAction(true);
-            yield return base.HealAction(base.Value1);
+            yield return HealAction(Value1);
             yield break;
         }
     }

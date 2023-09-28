@@ -19,7 +19,7 @@ using LBoL.Core.StatusEffects;
 using LBoL.Core.Randoms;
 using static StSStuffMod.BepinexPlugin;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSAlchemizeDef : CardTemplate
     {
@@ -59,10 +59,10 @@ namespace StSStuffMod
                IsUpgradable: true,
                Rarity: Rarity.Rare,
                Type: CardType.Skill,
-               TargetType: TargetType.Self,
+               TargetType: TargetType.Nobody,
                Colors: new List<ManaColor>() { ManaColor.Colorless },
                IsXCost: false,
-               Cost: new ManaGroup() { Colorless = 2 },
+               Cost: new ManaGroup() { Any = 1, Colorless = 1 },
                UpgradedCost: new ManaGroup() { Any = 0 },
                MoneyCost: null,
                Damage: null,
@@ -113,10 +113,9 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            this.toolCards = base.GameRun.RollCards(base.GameRun.AdventureRng, new CardWeightTable(RarityWeightTable.ShopCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyTool), base.Value1, false, null);
-            base.GameRun.AddDeckCards(this.toolCards, false, null);
+            Card[] cards = GameRun.RollCards(GameRun.GameRunEventRng, new CardWeightTable(RarityWeightTable.ShopCard, OwnerWeightTable.Valid, CardTypeWeightTable.OnlyTool), Value1, false, null);
+            GameRun.AddDeckCards(cards, false, null);
             yield break;
         }
-        private Card[] toolCards;
     }
 }

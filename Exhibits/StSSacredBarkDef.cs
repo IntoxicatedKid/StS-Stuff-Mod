@@ -35,7 +35,7 @@ using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 using LBoL.EntityLib.Cards.Character.Marisa;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSSacredBarkDef : ExhibitTemplate
     {
@@ -54,7 +54,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -83,7 +83,7 @@ namespace StSStuffMod
                 InitialCounter: 0,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -94,37 +94,37 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
-                base.ReactBattleEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(this.OnCardsAddedToDrawZone));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(this.OnAddCard));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
+                ReactBattleEvent(Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(OnCardsAddedToDrawZone));
+                ReactBattleEvent(Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(OnAddCard));
+                ReactBattleEvent(Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(OnAddCard));
+                ReactBattleEvent(Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(OnAddCard));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                foreach (Card card in base.Battle.EnumerateAllCards())
+                foreach (Card card in Battle.EnumerateAllCards())
                 {
                     if (card.CardType == CardType.Tool)
                     {
                         if (card.Config.Damage != null && card.RawDamage > 0)
                         {
-                            card.DeltaDamage += card.RawDamage * (base.Value1 / 100);
+                            card.DeltaDamage += card.RawDamage * (Value1 / 100);
                         }
                         if (card.Config.Block != null && card.RawBlock > 0)
                         {
-                            card.DeltaBlock += card.RawBlock * (base.Value1 / 100);
+                            card.DeltaBlock += card.RawBlock * (Value1 / 100);
                         }
                         if (card.Config.Shield != null && card.RawShield > 0)
                         {
-                            card.DeltaShield += card.RawShield * (base.Value1 / 100);
+                            card.DeltaShield += card.RawShield * (Value1 / 100);
                         }
                         if (card.Config.Value1 != null && card.ConfigValue1 > 0)
                         {
-                            card.DeltaValue1 += card.ConfigValue1 * (base.Value1 / 100);
+                            card.DeltaValue1 += card.ConfigValue1 * (Value1 / 100);
                         }
                         if (card.Config.Value2 != null && card.ConfigValue2 > 0)
                         {
-                            card.DeltaValue2 += card.ConfigValue2 * (base.Value1 / 100);
+                            card.DeltaValue2 += card.ConfigValue2 * (Value1 / 100);
                         }
                         /*if (card.Config.Mana != null)
                         {
@@ -140,12 +140,12 @@ namespace StSStuffMod
             }
             private IEnumerable<BattleAction> OnCardsAddedToDrawZone(CardsAddingToDrawZoneEventArgs args)
             {
-                yield return this.ToolCardModify(args.Cards);
+                yield return ToolCardModify(args.Cards);
                 yield break;
             }
             private IEnumerable<BattleAction> OnAddCard(CardsEventArgs args)
             {
-                yield return this.ToolCardModify(args.Cards);
+                yield return ToolCardModify(args.Cards);
                 yield break;
             }
             private BattleAction ToolCardModify(IEnumerable<Card> cards)
@@ -156,23 +156,23 @@ namespace StSStuffMod
                     {
                         if (card.Config.Damage != null && card.RawDamage > 0)
                         {
-                            card.DeltaDamage += card.RawDamage * (base.Value1 / 100);
+                            card.DeltaDamage += card.RawDamage * (Value1 / 100);
                         }
                         if (card.Config.Block != null && card.RawBlock > 0)
                         {
-                            card.DeltaBlock += card.RawBlock * (base.Value1 / 100);
+                            card.DeltaBlock += card.RawBlock * (Value1 / 100);
                         }
                         if (card.Config.Shield != null && card.RawShield > 0)
                         {
-                            card.DeltaShield += card.RawShield * (base.Value1 / 100);
+                            card.DeltaShield += card.RawShield * (Value1 / 100);
                         }
                         if (card.Config.Value1 != null && card.ConfigValue1 > 0)
                         {
-                            card.DeltaValue1 += card.ConfigValue1 * (base.Value1 / 100);
+                            card.DeltaValue1 += card.ConfigValue1 * (Value1 / 100);
                         }
                         if (card.Config.Value2 != null && card.ConfigValue2 > 0)
                         {
-                            card.DeltaValue2 += card.ConfigValue2 * (base.Value1 / 100);
+                            card.DeltaValue2 += card.ConfigValue2 * (Value1 / 100);
                         }
                         /*if (card.Config.Mana != null)
                         {

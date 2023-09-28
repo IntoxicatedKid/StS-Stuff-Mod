@@ -38,7 +38,7 @@ using LBoL.Core.GapOptions;
 using LBoL.Core.Stations;
 using LBoL.EntityLib.Exhibits.Adventure;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSFusionHammerDef : ExhibitTemplate
     {
@@ -57,7 +57,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -86,7 +86,6 @@ namespace StSStuffMod
                 InitialCounter: 0,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -97,21 +96,21 @@ namespace StSStuffMod
         {
             protected override void OnAdded(PlayerUnit player)
             {
-                base.HandleGameRunEvent<StationEventArgs>(base.GameRun.GapOptionsGenerating, delegate (StationEventArgs args)
+                HandleGameRunEvent(GameRun.GapOptionsGenerating, delegate (StationEventArgs args)
                 {
-                    base.NotifyActivating();
+                    NotifyActivating();
                     ((GapStation)args.Station).GapOptions.RemoveAll(o => o.Type == GapOptionType.UpgradeCard);
                     args.Station.Finish();
                 });
             }
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<UnitEventArgs>(base.Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(this.OnOwnerTurnStarted));
+                ReactBattleEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerTurnStarted));
             }
             private IEnumerable<BattleAction> OnOwnerTurnStarted(UnitEventArgs args)
             {
-                base.NotifyActivating();
-                ManaGroup manaGroup = ManaGroup.Single(ManaColors.Colors.Sample(base.GameRun.BattleRng));
+                NotifyActivating();
+                ManaGroup manaGroup = ManaGroup.Single(ManaColors.Colors.Sample(GameRun.BattleRng));
                 yield return new GainManaAction(manaGroup);
                 yield break;
             }

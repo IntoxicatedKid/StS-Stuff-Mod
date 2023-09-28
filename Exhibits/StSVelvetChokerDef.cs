@@ -1,4 +1,4 @@
-﻿/*using LBoL.ConfigData;
+﻿using LBoL.ConfigData;
 using LBoL.Core.Cards;
 using LBoLEntitySideloader;
 using LBoLEntitySideloader.Attributes;
@@ -30,13 +30,13 @@ using LBoL.Core.Units;
 using LBoL.EntityLib.Cards.Character.Cirno.Friend;
 using LBoL.EntityLib.Cards.Character.Reimu;
 using LBoL.EntityLib.Cards.Neutral.MultiColor;
-
 using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
+using Yarn;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSVelvetChokerDef : ExhibitTemplate
     {
@@ -55,7 +55,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -65,7 +65,7 @@ namespace StSStuffMod
                 Index: sequenceTable.Next(typeof(ExhibitConfig)),
                 Id: "",
                 Order: 10,
-                IsDebug: true,
+                IsDebug: false,
                 IsPooled: false,
                 IsSentinel: false,
                 Revealable: false,
@@ -74,25 +74,49 @@ namespace StSStuffMod
                 LosableType: ExhibitLosableType.CantLose,
                 Rarity: Rarity.Shining,
                 Value1: 6,
-                Value2: null,
+                Value2: 1,
                 Value3: null,
                 Mana: null,
                 BaseManaRequirement: null,
                 BaseManaColor: ManaColor.Philosophy,
                 BaseManaAmount: 2,
-                HasCounter: false,
-                InitialCounter: null,
-                Keywords: Keyword.None,
+                HasCounter: true,
+                InitialCounter: 0,
+                Keywords: Keyword.Overdraft,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
         }
         [EntityLogic(typeof(StSVelvetChokerDef))]
         [UsedImplicitly]
+        [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 0)]
         public sealed class StSVelvetChoker : ShiningExhibit
         {
+            protected override void OnEnterBattle()
+            {
+                ReactBattleEvent(Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsed));
+                HandleBattleEvent(Battle.Player.TurnEnding, delegate (UnitEventArgs _)
+                {
+                    Counter = 0;
+                });
+            }
+            private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
+            {
+                if (!Battle.BattleShouldEnd && Owner.IsInTurn)
+                {
+                    Counter = Counter + 1;
+                    if (Counter > Value1)
+                    {
+                        yield return new LockRandomTurnManaAction(Value2);
+                    }
+                }
+                yield break;
+            }
+            protected override void OnLeaveBattle()
+            {
+                Counter = 0;
+            }
         }
     }
-}*/
+}

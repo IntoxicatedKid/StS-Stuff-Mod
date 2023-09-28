@@ -25,7 +25,7 @@ using LBoL.Base.Extensions;
 using System.Linq;
 using UnityEngine;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSGoodInstinctsDef : CardTemplate
     {
@@ -119,7 +119,7 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.DefenseAction(true);
+            yield return DefenseAction(true);
             yield break;
         }
     }

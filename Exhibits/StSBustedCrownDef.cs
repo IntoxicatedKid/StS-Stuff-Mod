@@ -36,7 +36,7 @@ using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using LBoL.Core.Stations;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSBustedCrownDef : ExhibitTemplate
     {
@@ -55,7 +55,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -73,7 +73,7 @@ namespace StSStuffMod
                 Owner: "",
                 LosableType: ExhibitLosableType.CantLose,
                 Rarity: Rarity.Shining,
-                Value1: 2,
+                Value1: 1,
                 Value2: null,
                 Value3: null,
                 Mana: null,
@@ -84,7 +84,6 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -96,13 +95,13 @@ namespace StSStuffMod
         {
             protected override void OnAdded(PlayerUnit player)
             {
-                base.GameRun.AdditionalRewardCardCount -= base.Value1;
+                GameRun.AdditionalRewardCardCount -= Value1;
             }
 
             // Token: 0x0600090C RID: 2316 RVA: 0x000269E0 File Offset: 0x00024BE0
             protected override void OnRemoved(PlayerUnit player)
             {
-                base.GameRun.AdditionalRewardCardCount += base.Value1;
+                GameRun.AdditionalRewardCardCount += Value1;
             }
         }
     }

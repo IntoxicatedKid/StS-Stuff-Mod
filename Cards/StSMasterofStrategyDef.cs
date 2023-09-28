@@ -20,7 +20,7 @@ using LBoL.Core.Randoms;
 using static StSStuffMod.BepinexPlugin;
 using LBoL.EntityLib.StatusEffects.Basic;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSMasterofStrategyDef : CardTemplate
     {
@@ -114,7 +114,7 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return new DrawManyCardAction(base.Value1);
+            yield return new DrawManyCardAction(Value1);
             yield break;
         }
     }

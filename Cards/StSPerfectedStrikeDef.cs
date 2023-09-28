@@ -19,7 +19,7 @@ using static StSStuffMod.BepinexPlugin;
 using System.Linq;
 using LBoL.EntityLib.Exhibits.Common;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSPerfectedStrikeDef : CardTemplate
     {
@@ -50,7 +50,7 @@ namespace StSStuffMod
                Order: 10,
                AutoPerform: true,
                Perform: new string[0][],
-               GunName: "ShootR1",
+               GunName: "ShootR",
                GunNameBurst: "ShootR1",
                DebugLevel: 0,
                Revealable: false,
@@ -115,9 +115,9 @@ namespace StSStuffMod
         {
             get
             {
-                if (base.GameRun != null)
+                if (GameRun != null)
                 {
-                    return base.GameRun.BaseDeck.Count((Card card) => (card.IsBasic && card.CardType == CardType.Attack) || card.Name.Contains("Strike")) * base.Value1;
+                    return GameRun.BaseDeck.Count((card) => card.IsBasic && card.CardType == CardType.Attack || card.Name.Contains("Strike")) * Value1;
                 }
                 return 0;
             }

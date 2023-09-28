@@ -40,7 +40,7 @@ using LBoL.EntityLib.Adventures.Common;
 using LBoL.EntityLib.Adventures.Shared12;
 using LBoL.EntityLib.Adventures.Stage1;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSSneckoEyeDef : ExhibitTemplate
     {
@@ -59,7 +59,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -88,7 +88,6 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -99,20 +98,20 @@ namespace StSStuffMod
         {
             protected override void OnAdded(PlayerUnit player)
             {
-                base.GameRun.DrawCardCount += base.Value1;
+                GameRun.DrawCardCount += Value1;
             }
             protected override void OnRemoved(PlayerUnit player)
             {
-                base.GameRun.DrawCardCount -= base.Value1;
+                GameRun.DrawCardCount -= Value1;
             }
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<CardEventArgs>(base.Battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(this.OnCardDrawn));
+                ReactBattleEvent(Battle.CardDrawn, new EventSequencedReactor<CardEventArgs>(OnCardDrawn));
             }
             private IEnumerable<BattleAction> OnCardDrawn(CardEventArgs args)
             {
                 Card card = args.Card;
-                this._costs = new UniqueRandomPool<int>(false)
+                _costs = new UniqueRandomPool<int>(false)
                 {
                     { 0, 1f },
                     { 1, 1f },
@@ -120,10 +119,10 @@ namespace StSStuffMod
                     { 3, 1f },
                     { 4, 1f },
                     { 5, 1f }
-                }.SampleMany(base.GameRun.BattleRng, 6, true);
+                }.SampleMany(GameRun.BattleRng, 6, true);
                 for (int j = 0; j < 6; j++)
                 {
-                    switch (this._costs[j])
+                    switch (_costs[j])
                     {
                         case 0:
                             card.SetBaseCost(ManaGroup.Anys(j));

@@ -36,7 +36,7 @@ using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 using LBoL.EntityLib.Cards.Character.Marisa;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSMedicalKitDef : ExhibitTemplate
     {
@@ -55,7 +55,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -82,9 +82,9 @@ namespace StSStuffMod
                 BaseManaAmount: 0,
                 HasCounter: false,
                 InitialCounter: 0,
-                Keywords: Keyword.Morph | Keyword.Exile | Keyword.Forbidden,
+                Keywords: Keyword.Forbidden | Keyword.Exile | Keyword.Morph,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -95,21 +95,21 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
-                base.ReactBattleEvent<CardsAddingToDrawZoneEventArgs>(base.Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(this.OnCardsAddedToDrawZone));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(this.OnCardsAdded));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(this.OnCardsAdded));
-                base.ReactBattleEvent<CardsEventArgs>(base.Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(this.OnCardsAdded));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
+                ReactBattleEvent(Battle.CardsAddedToDrawZone, new EventSequencedReactor<CardsAddingToDrawZoneEventArgs>(OnCardsAddedToDrawZone));
+                ReactBattleEvent(Battle.CardsAddedToHand, new EventSequencedReactor<CardsEventArgs>(OnCardsAdded));
+                ReactBattleEvent(Battle.CardsAddedToDiscard, new EventSequencedReactor<CardsEventArgs>(OnCardsAdded));
+                ReactBattleEvent(Battle.CardsAddedToExile, new EventSequencedReactor<CardsEventArgs>(OnCardsAdded));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                base.NotifyActivating();
-                foreach (Card card in base.Battle.EnumerateAllCards())
+                NotifyActivating();
+                foreach (Card card in Battle.EnumerateAllCards())
                 {
                     if (card.CardType == CardType.Status && card.IsForbidden)
                     {
                         card.NotifyChanged();
-                        card.SetBaseCost(base.Mana);
+                        card.SetBaseCost(Mana);
                         card.IsExile = true;
                         card.IsForbidden = false;
                     }
@@ -118,12 +118,12 @@ namespace StSStuffMod
             }
             private IEnumerable<BattleAction> OnCardsAddedToDrawZone(CardsAddingToDrawZoneEventArgs args)
             {
-                yield return this.StatusCardModify(args.Cards);
+                yield return StatusCardModify(args.Cards);
                 yield break;
             }
             private IEnumerable<BattleAction> OnCardsAdded(CardsEventArgs args)
             {
-                yield return this.StatusCardModify(args.Cards);
+                yield return StatusCardModify(args.Cards);
                 yield break;
             }
             private BattleAction StatusCardModify(IEnumerable<Card> cards)
@@ -133,7 +133,7 @@ namespace StSStuffMod
                     if (card.CardType == CardType.Status && card.IsForbidden)
                     {
                         card.NotifyChanged();
-                        card.SetBaseCost(base.Mana);
+                        card.SetBaseCost(Mana);
                         card.IsExile = true;
                         card.IsForbidden = false;
                     }

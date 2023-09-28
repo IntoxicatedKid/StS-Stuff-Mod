@@ -23,7 +23,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using System.Linq;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSMadnessDef : CardTemplate
     {
@@ -117,12 +117,12 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            List<Card> list = base.Battle.HandZone.Where((Card card) => card.BaseCost.Amount > 0).ToList<Card>();
+            List<Card> list = Battle.HandZone.Where((card) => card.BaseCost.Amount > 0).ToList();
             if (list.Count > 0)
             {
-                Card card2 = list.Sample(base.GameRun.BattleRng);
-                card2.NotifyActivating();
-                card2.SetBaseCost(base.Mana);
+                Card card = list.Sample(GameRun.BattleRng);
+                card.NotifyActivating();
+                card.SetBaseCost(Mana);
             }
             yield break;
         }

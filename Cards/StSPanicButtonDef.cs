@@ -25,7 +25,7 @@ using LBoL.Base.Extensions;
 using System.Linq;
 using UnityEngine;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSPanicButtonDef : CardTemplate
     {
@@ -119,8 +119,8 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return base.DefenseAction(true);
-            yield return base.DebuffAction<StSPanicButtonSeDef.StSPanicButtonSe>(base.Battle.Player, 0, base.Value1, 0, 0, true, 0.2f);
+            yield return DefenseAction(true);
+            yield return DebuffAction<StSPanicButtonSeDef.StSPanicButtonSe>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
             yield break;
         }
     }
@@ -173,7 +173,7 @@ namespace StSStuffMod
         {
             protected override void OnAdded(Unit unit)
             {
-                base.HandleOwnerEvent<BlockShieldEventArgs>(base.Owner.BlockShieldGaining, delegate (BlockShieldEventArgs args)
+                HandleOwnerEvent(Owner.BlockShieldGaining, delegate (BlockShieldEventArgs args)
                 {
                     if (args.Type == BlockShieldType.Direct)
                     {
@@ -184,30 +184,11 @@ namespace StSStuffMod
                     {
                         if (args.Block != 0f)
                         {
-                            args.Block = Math.Max(args.Block * (float)0, 0f);
+                            args.Block = Math.Max(args.Block * 0, 0f);
                         }
                         if (args.Shield != 0f)
                         {
-                            args.Shield = Math.Max(args.Shield * (float)0, 0f);
-                        }
-                        args.AddModifier(this);
-                    }
-                });
-                base.HandleOwnerEvent<BlockShieldEventArgs>(base.Owner.BlockShieldCasting, delegate (BlockShieldEventArgs args)
-                {
-                    if (args.Type == BlockShieldType.Direct)
-                    {
-                        return;
-                    }
-                    if (args.Cause == ActionCause.EnemyAction)
-                    {
-                        if (args.Block != 0f)
-                        {
-                            args.Block = Math.Max(args.Block * (float)0, 0f);
-                        }
-                        if (args.Shield != 0f)
-                        {
-                            args.Shield = Math.Max(args.Shield * (float)0, 0f);
+                            args.Shield = Math.Max(args.Shield * 0, 0f);
                         }
                         args.AddModifier(this);
                     }

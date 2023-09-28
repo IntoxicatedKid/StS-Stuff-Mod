@@ -36,7 +36,7 @@ using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSPhilosophersStoneDef : ExhibitTemplate
     {
@@ -55,7 +55,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -84,7 +84,7 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -96,14 +96,14 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                base.NotifyActivating();
-                foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+                NotifyActivating();
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                 {
-                    yield return new ApplyStatusEffectAction<Firepower>(enemyUnit, base.Value1, null, null, null, 0.2f, true);
+                    yield return new ApplyStatusEffectAction<Firepower>(enemyUnit, Value1, null, null, null, 0.2f, true);
                 }
                 yield break;
             }

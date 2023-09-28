@@ -46,7 +46,7 @@ using LBoL.Presentation.Units;
 using LBoL.EntityLib.EnemyUnits.Character;
 using LBoL.Presentation.UI;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSNlothsGiftDef : ExhibitTemplate
     {
@@ -65,7 +65,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -94,21 +94,22 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
         }
         [EntityLogic(typeof(StSNlothsGiftDef))]
         [UsedImplicitly]
+        [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 9)]
         public sealed class StSNlothsGift : Exhibit
         {
-            [HarmonyPatch(typeof(GameRunController), nameof(GameRunController.GetRewardCards))]
-            class GameRunController_GetRewardCards_Patch
+            [HarmonyPatch(typeof(GameRunController), nameof(GameRunController.BaseCardWeight))]
+            class GameRunController_BaseCardWeight_Patch
             {
                 static bool Prefix()
                 {
-                    if (GameMaster.Instance.CurrentGameRun.Player.HasExhibit<StSNlothsGiftDef.StSNlothsGift>())
+                    if (GameMaster.Instance.CurrentGameRun.Player.HasExhibit<StSNlothsGift>())
                     {
                         GameMaster.Instance.CurrentGameRun._cardRareWeightFactor = 3f;
                     }

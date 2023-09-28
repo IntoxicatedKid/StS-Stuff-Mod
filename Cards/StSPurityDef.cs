@@ -23,7 +23,7 @@ using LBoL.Base.Extensions;
 using LBoL.Core.Battle.Interactions;
 using System.Linq;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSPurityDef : CardTemplate
     {
@@ -117,10 +117,10 @@ namespace StSStuffMod
     {
         public override Interaction Precondition()
         {
-            List<Card> list = (base.Battle.HandZone.Where((Card card) => card != this).ToList<Card>());
-            if (!list.Empty<Card>())
+            List<Card> list = Battle.HandZone.Where((card) => card != this).ToList();
+            if (!list.Empty())
             {
-                return new SelectCardInteraction(0, base.Value1, list, SelectedCardHandling.DoNothing);
+                return new SelectCardInteraction(0, Value1, list, SelectedCardHandling.DoNothing);
             }
             return null;
         }

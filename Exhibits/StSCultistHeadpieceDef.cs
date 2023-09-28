@@ -35,7 +35,7 @@ using JetBrains.Annotations;
 using LBoL.EntityLib.Cards.Character.Marisa;
 using LBoL.EntityLib.EnemyUnits.Character;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSCultistHeadpieceDef : ExhibitTemplate
     {
@@ -54,7 +54,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -93,22 +93,22 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
                 //base.ReactBattleEvent<UnitEventArgs>(base.Battle.Player.TurnStarted, new EventSequencedReactor<UnitEventArgs>(this.OnPlayerTurnStarted));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                base.NotifyActivating();
-                yield return PerformAction.Chat(base.Battle.Player, "CAW!\nCAAAW", 2f, 0f, 0f, true);
+                NotifyActivating();
+                yield return PerformAction.Chat(Battle.Player, "CAW!\nCAAAW", 2f, 0f, 0f, true);
                 yield return PerformAction.Sfx("Raven", 0f);
                 yield return PerformAction.Sfx("Raven", 0f);
                 yield return PerformAction.Sfx("Raven", 0.5f);
                 yield return PerformAction.Sfx("Raven", 0f);
-                foreach (EnemyUnit enemyUnit in base.Battle.EnemyGroup)
+                foreach (EnemyUnit enemyUnit in Battle.EnemyGroup)
                 {
                     if (enemyUnit.IsAlive)
                     {
-                        yield return new ApplyStatusEffectAction<TempFirepowerNegative>(enemyUnit, new int?(base.Value1), null, null, null, 0f, true);
+                        yield return new ApplyStatusEffectAction<TempFirepowerNegative>(enemyUnit, new int?(Value1), null, null, null, 0f, true);
                     }
                 }
                 yield break;

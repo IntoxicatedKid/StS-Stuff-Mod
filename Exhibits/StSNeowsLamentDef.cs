@@ -46,12 +46,13 @@ using LBoL.Presentation.Units;
 using LBoL.EntityLib.EnemyUnits.Character;
 using LBoL.Presentation.UI;
 using LBoL.EntityLib.Adventures;
+using Yarn;
 using LBoL.Core.GapOptions;
 using LBoL.EntityLib.Exhibits.Adventure;
 using static System.Collections.Specialized.BitVector32;
 using static UnityEngine.UI.GridLayoutGroup;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSNeowsLamentDef : ExhibitTemplate
     {
@@ -70,7 +71,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -110,18 +111,19 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                if (base.Owner != null && base.Owner.IsAlive && base.Counter > 0)
+                if (Counter > 0)
                 {
-                    int num = base.Counter - 1;
-                    base.Counter = num;
-                    base.NotifyActivating();
-                    foreach (EnemyUnit enemyUnit in base.Battle.AllAliveEnemies)
+                    int num = Counter - 1;
+                    Counter = num;
+                    NotifyActivating();
+                    yield return PerformAction.Effect(Battle.Player, "JunkoPurify", 0f, "Junko3", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                    foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                     {
-                        base.GameRun.SetEnemyHpAndMaxHp(base.Value2, enemyUnit.MaxHp, enemyUnit, false);
+                        GameRun.SetEnemyHpAndMaxHp(Value2, enemyUnit.MaxHp, enemyUnit, false);
                     }
                 }
                 yield break;

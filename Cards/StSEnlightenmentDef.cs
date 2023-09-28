@@ -24,7 +24,7 @@ using LBoL.Core.Battle.Interactions;
 using System.Linq;
 using LBoL.Presentation.UI.Panels;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSEnlightenmentDef : CardTemplate
     {
@@ -118,21 +118,21 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            List<Card> list = base.Battle.HandZone.Where((Card card) => card.BaseCost.Amount > 0).ToList<Card>();
+            List<Card> list = Battle.HandZone.ToList();
             if (list.Count > 0)
             {
-                yield return PerformAction.Effect(base.Battle.Player, "Invincible", 0f, "GuirenItem", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                yield return PerformAction.Effect(Battle.Player, "Invincible", 0f, "GuirenItem", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
                 foreach (Card card in list)
                 {
-                    if (!this.IsUpgraded)
+                    if (!IsUpgraded)
                     {
-                        card.NotifyActivating();
-                        card.SetTurnCost(base.Mana);
+                        card.NotifyChanged();
+                        card.SetTurnCost(Mana);
                     }
                     else
                     {
-                        card.NotifyActivating();
-                        card.SetBaseCost(base.Mana);
+                        card.NotifyChanged();
+                        card.SetBaseCost(Mana);
                     }
                 }
             }

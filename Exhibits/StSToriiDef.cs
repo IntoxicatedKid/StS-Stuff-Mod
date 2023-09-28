@@ -46,12 +46,13 @@ using LBoL.Presentation.Units;
 using LBoL.EntityLib.EnemyUnits.Character;
 using LBoL.Presentation.UI;
 using LBoL.EntityLib.Adventures;
+using Yarn;
 using LBoL.Core.GapOptions;
 using LBoL.EntityLib.Exhibits.Adventure;
 using static System.Collections.Specialized.BitVector32;
 using static UnityEngine.UI.GridLayoutGroup;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSToriiDef : ExhibitTemplate
     {
@@ -70,7 +71,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -109,7 +110,7 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.HandleBattleEvent<DamageEventArgs>(base.Battle.Player.DamageTaking, new GameEventHandler<DamageEventArgs>(this.OnPlayerDamageTaking));
+                HandleBattleEvent(Battle.Player.DamageTaking, new GameEventHandler<DamageEventArgs>(OnPlayerDamageTaking));
             }
             private void OnPlayerDamageTaking(DamageEventArgs args)
             {
@@ -117,10 +118,10 @@ namespace StSStuffMod
                 if (damageInfo.DamageType == DamageType.Attack)
                 {
                     int num = damageInfo.Damage.RoundToInt();
-                    if (num <= base.Value1 && num > base.Value2)
+                    if (num <= Value1 && num > Value2)
                     {
-                        base.NotifyActivating();
-                        args.DamageInfo = damageInfo.ReduceActualDamageBy(num - base.Value2);
+                        NotifyActivating();
+                        args.DamageInfo = damageInfo.ReduceActualDamageBy(num - Value2);
                         args.AddModifier(this);
                     }
                 }

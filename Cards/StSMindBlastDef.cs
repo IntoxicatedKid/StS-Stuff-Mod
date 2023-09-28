@@ -17,7 +17,7 @@ using System.Threading;
 using LBoL.Core.StatusEffects;
 using static StSStuffMod.BepinexPlugin;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSMindBlastDef : CardTemplate
     {
@@ -113,11 +113,11 @@ namespace StSStuffMod
         {
             get
             {
-                if (base.Battle == null)
+                if (Battle == null)
                 {
                     return 0;
                 }
-                return base.Battle.DrawZone.Count;
+                return Battle.DrawZone.Count;
             }
         }
     }

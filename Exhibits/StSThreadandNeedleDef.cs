@@ -36,7 +36,7 @@ using LBoL.EntityLib.Cards.Character.Marisa;
 using LBoL.EntityLib.EnemyUnits.Character;
 using LBoL.EntityLib.StatusEffects.Enemy;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSThreadandNeedleDef : ExhibitTemplate
     {
@@ -55,7 +55,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -94,12 +94,12 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<GameEventArgs>(base.Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(this.OnBattleStarted));
+                ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
-                base.NotifyActivating();
-                yield return new ApplyStatusEffectAction<DroneBlock>(base.Owner, base.Value1, null, null, null, 0f, true);
+                NotifyActivating();
+                yield return new ApplyStatusEffectAction<DroneBlock>(Owner, Value1, null, null, null, 0f, true);
                 yield break;
             }
         }

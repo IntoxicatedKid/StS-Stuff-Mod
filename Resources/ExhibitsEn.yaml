@@ -6,6 +6,10 @@ StSBustedCrown:
   Description: "Adds {BaseMana} to the mana base.\nCard rewards have {Value1} less option{Value1:plural one='' other='s'}.\n{SelfName} can't be found after act 3."
   Name: Busted Crown
   FlavorText: "The Champ's crown... or a pale imitation?"
+StSCauldron:
+  Description: "When acquired, choose {Value1} random |Tool| cards to add to the library."
+  Name: Cauldron
+  FlavorText: "The Merchant is actually a rather skilled potion brewer. Buy 4 get 1 free."
 StSCoffeeDripper:
   Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nRemoves the ability to |Drink| at Gaps."
   Name: Coffee Dripper
@@ -19,9 +23,13 @@ StSCursedKey:
   Name: Cursed Key
   FlavorText: "You can feel the malicious energy emanating from the key. Power comes at a price."
 StSEctoplasm:
-  Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer gain <sprite=\"Point\" name=\"Gold\">.\n{SelfName} can't be found after act 3."
+  Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer gain <sprite=\"Point\" name=\"Gold\">. |Upgrading| at a Gap will always cost {Value1} <sprite=\"Point\" name=\"Gold\">.\n{SelfName} can't be found after act 3."
   Name: Ectoplasm
   FlavorText: "This blob of slime and energy seems to pulse with life."
+StSEnchiridion:
+  Description: "At the start of combat, add a random ability card to the hand. It |temporarily costs| {Mana}."
+  Name: Enchiridion
+  FlavorText: "The legendary journal of an ancient lich."
 StSFrozenEye:
   Description: "Unlocks Actual Order of the draw pile."
   Name: Frozen Eye
@@ -46,6 +54,14 @@ StSNlothsGift:
   Description: "Triples the chance to find rare cards."
   Name: N'loth's Gift
   FlavorText: "The strange gift from N'loth. Whenever you try and unwrap it, another wrapped box of the same size lies within."
+StSOrangePellets:
+  Description: "Whenever {Value1} different type of cards are played in a turn, remove all debuffs from {PlayerName}."
+  Name: Orange Pellets
+  FlavorText: '"Made from various fungi found throughout the Spire, they will stave off any affliction."'
+StSOrrery:
+  Description: "When acquired, grants {Value1} card rewards."
+  Name: Orrery
+  FlavorText: '"Once you understand the universe..." - Zoroth'
 StSPandorasBox:
   Description: "When acquired, transform |Basic| cards to random cards."
   Name: Pandora's Box
@@ -74,19 +90,31 @@ StSSozu:
   Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nAll |Tool| cards has |Unplayable|."
   Name: Sozu
   FlavorText: "You notice that magical liquids seem to lose their properties when near this relic."
+StSSsserpentHead:
+  Description: "Whenever {PlayerName} visits Event, gain {Value1} <sprite=\"Point\" name=\"Gold\">."
+  Name: Ssserpent Head
+  FlavorText: "The most fulfilling of lives is that in which you can buy anything!"
+StSStrangeSpoon:
+  Description: "Whenever a non-|Misfortune| and non-Status |Exile| card is played, has 50% chance to return to the discard pile."
+  Name: Strange Spoon
+  FlavorText: "Staring at the spoon, it appears to bend and twist around before your eyes."
 StSThreadandNeedle:
   Description: "At the start of combat, gain {Value1} |Defense Matrix|."
   Name: Thread and Needle
   FlavorText: "Wrapping the magical thread around your body, you feel harder to the touch."
 StSToolbox:
   Description: "At the start of {PlayerName}'s first turn each combat, choose 1 of {Value1} random colorless cards to add to the hand. Mana of any color can be spent to pay their mana costs."
-  Name: Toolbox
+  Name: StS Toolbox
   FlavorText: "A tool for every job."
 StSTorii:
   Description: "Whenever {PlayerName} would be dealt {Value1} or less unblocked damage, they are dealt {Value2} damage instead."
   Name: Torii
   FlavorText: "Holding the small Torii, you feel a sense of calm and safety drift through your mind."
 StSVelvetChoker:
-  Description: "Adds {BaseMana} to the mana base.\nUnimplemented due to balance issue."
+  Description: "Adds {BaseMana} to the mana base.\nAfter {Value1} cards are played in a turn, whenever {PlayerName} plays a card, |Overdraft| {Value2}.\n{SelfName} can't be found after act 3."
   Name: Velvet Choker
   FlavorText: '"Immense power, but too limited." - Kublai the Great'
+StSWristBlade:
+  Description: "Attack cards with {Mana} or less cost deals {Value2} more damage."
+  Name: Wrist Blade
+  FlavorText: "Handy for assassinations."

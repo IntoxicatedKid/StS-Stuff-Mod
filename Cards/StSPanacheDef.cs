@@ -26,10 +26,9 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
-using StSStuffMod;
-using static StSStuffMod.StSPanacheDef;
+using static StSStuffMod.Cards.StSPanacheDef;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSPanacheDef : CardTemplate
     {
@@ -121,7 +120,7 @@ namespace StSStuffMod
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.BuffAction<StSPanacheSeDef.StSPanacheSe>(base.Value2, 0, 0, base.Value1, 0.2f);
+                yield return BuffAction<StSPanacheSeDef.StSPanacheSe>(Value2, 0, 0, Value1, 0.2f);
                 yield break;
             }
         }
@@ -160,7 +159,7 @@ namespace StSStuffMod
                 DurationStackType: StackType.Add,
                 DurationDecreaseTiming: DurationDecreaseTiming.Custom,
                 HasCount: true,
-                CountStackType: StackType.Add,
+                CountStackType: StackType.Keep,
                 LimitStackType: StackType.Keep,
                 ShowPlusByLimit: false,
                 Keywords: Keyword.None,
@@ -176,32 +175,32 @@ namespace StSStuffMod
         {
             protected override void OnAdded(Unit unit)
             {
-                base.ReactOwnerEvent<CardUsingEventArgs>(base.Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(this.OnCardUsed));
-                base.ReactOwnerEvent<UnitEventArgs>(base.Battle.Player.TurnEnding, new EventSequencedReactor<UnitEventArgs>(this.OnPlayerTurnEnding));
+                ReactOwnerEvent(Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsed));
+                ReactOwnerEvent(Battle.Player.TurnEnding, new EventSequencedReactor<UnitEventArgs>(OnPlayerTurnEnding));
             }
             private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
             {
-                if (base.Battle.BattleShouldEnd)
+                if (Battle.BattleShouldEnd)
                 {
                     yield break;
                 }
-                if (args.Card != base.SourceCard)
+                if (args.Card != SourceCard)
                 {
-                    int count = base.Count;
-                    base.Count = count - 1;
-                    this.NotifyChanged();
-                    if (base.Count <= 0)
+                    int count = Count;
+                    Count = count - 1;
+                    NotifyChanged();
+                    if (Count <= 0)
                     {
-                        base.NotifyActivating();
-                        yield return new DamageAction(base.Battle.Player, base.Battle.EnemyGroup.Alives, DamageInfo.Reaction((float)base.Level), "Instant", GunType.Single);
-                        base.Count = 5;
+                        NotifyActivating();
+                        yield return new DamageAction(Battle.Player, Battle.EnemyGroup.Alives, DamageInfo.Reaction(Level), "Instant", GunType.Single);
+                        Count = 5;
                     }
                 }
                 yield break;
             }
             private IEnumerable<BattleAction> OnPlayerTurnEnding(UnitEventArgs args)
             {
-                base.Count = 5;
+                Count = 5;
                 yield break;
             }
         }

@@ -26,10 +26,9 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
-using StSStuffMod;
-using static StSStuffMod.StSPanacheDef;
+using static StSStuffMod.Cards.StSPanacheDef;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSFootworkDef : CardTemplate
     {
@@ -121,7 +120,7 @@ namespace StSStuffMod
         {
             protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
             {
-                yield return base.BuffAction<Spirit>(base.Value1, 0, 0, 0, 0.2f);
+                yield return BuffAction<Spirit>(Value1, 0, 0, 0, 0.2f);
                 yield break;
             }
         }

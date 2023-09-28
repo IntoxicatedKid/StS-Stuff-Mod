@@ -17,7 +17,7 @@ using System.Threading;
 using LBoL.Core.StatusEffects;
 using static StSStuffMod.BepinexPlugin;
 
-namespace StSStuffMod
+namespace StSStuffMod.Cards
 {
     public sealed class StSEntrenchDef : CardTemplate
     {
@@ -60,8 +60,8 @@ namespace StSStuffMod
                TargetType: TargetType.Self,
                Colors: new List<ManaColor>() { ManaColor.White },
                IsXCost: false,
-               Cost: new ManaGroup() { White = 3 },
-               UpgradedCost: new ManaGroup() { White = 3 },
+               Cost: new ManaGroup() { Any = 1, White = 2 },
+               UpgradedCost: new ManaGroup() { Any = 1, White = 2 },
                MoneyCost: null,
                Damage: null,
                UpgradedDamage: null,
@@ -111,20 +111,20 @@ namespace StSStuffMod
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-			int block = base.Battle.Player.Block;
-            int Shield = base.Battle.Player.Shield;
+            int block = Battle.Player.Block;
+            int Shield = Battle.Player.Shield;
             if (block > 0)
             {
-                yield return new CastBlockShieldAction(base.Battle.Player, block, 0, BlockShieldType.Direct, false);
+                yield return new CastBlockShieldAction(Battle.Player, block, 0, BlockShieldType.Direct, false);
             }
-            if (this.IsUpgraded)
+            if (IsUpgraded)
             {
                 if (Shield > 0)
                 {
-                    yield return new CastBlockShieldAction(base.Battle.Player, 0, Shield, BlockShieldType.Direct, false);
+                    yield return new CastBlockShieldAction(Battle.Player, 0, Shield, BlockShieldType.Direct, false);
                 }
             }
             yield break;
-		}
+        }
     }
 }

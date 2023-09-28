@@ -37,7 +37,7 @@ using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using LBoL.Core.Stations;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSCursedKeyDef : ExhibitTemplate
     {
@@ -56,7 +56,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -85,7 +85,7 @@ namespace StSStuffMod
                 InitialCounter: null,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -97,13 +97,13 @@ namespace StSStuffMod
         {
             protected override void OnAdded(PlayerUnit player)
             {
-                base.HandleGameRunEvent<StationEventArgs>(base.GameRun.StationEntered, delegate (StationEventArgs args)
+                HandleGameRunEvent(GameRun.StationEntered, delegate (StationEventArgs args)
                 {
                     if (args.Station.Type == StationType.Supply)
                     {
-                        base.NotifyActivating();
-                        Card card = base.GameRun.GetRandomCurseCard(base.GameRun.AdventureRng, false);
-                        base.GameRun.AddDeckCard(card, false, null);
+                        NotifyActivating();
+                        Card card = GameRun.GetRandomCurseCard(GameRun.GameRunEventRng, false);
+                        GameRun.AddDeckCard(card, false, null);
                     }
                 });
             }

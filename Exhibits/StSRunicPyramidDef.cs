@@ -35,7 +35,7 @@ using LBoL.Presentation.UI.Panels;
 using UnityEngine.InputSystem.Controls;
 using JetBrains.Annotations;
 
-namespace StSStuffMod
+namespace StSStuffMod.Exhibits
 {
     public sealed class StSRunicPyramidDef : ExhibitTemplate
     {
@@ -54,7 +54,7 @@ namespace StSStuffMod
             // embedded resource folders are separated by a dot
             var folder = "";
             var exhibitSprites = new ExhibitSprites();
-            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite((folder + GetId() + s + ".png"), embeddedSource);
+            Func<string, Sprite> wrap = (s) => ResourceLoader.LoadSprite(folder + GetId() + s + ".png", embeddedSource);
             exhibitSprites.main = wrap("");
             return exhibitSprites;
         }
@@ -83,7 +83,7 @@ namespace StSStuffMod
                 InitialCounter: 0,
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { },
-                // example of referring to UniqueId of an entity without calling MakeConfig
+
                 RelativeCards: new List<string>() { }
             );
             return exhibitConfig;
@@ -94,13 +94,13 @@ namespace StSStuffMod
         {
             protected override void OnEnterBattle()
             {
-                base.ReactBattleEvent<CardMovingEventArgs>(base.Battle.CardMoving, new EventSequencedReactor<CardMovingEventArgs>(this.OnCardMoving));
+                ReactBattleEvent(Battle.CardMoving, new EventSequencedReactor<CardMovingEventArgs>(OnCardMoving));
             }
             private IEnumerable<BattleAction> OnCardMoving(CardMovingEventArgs args)
             {
                 if (args.Cause == ActionCause.TurnEnd)
                 {
-                    if ((args.Card.CardType != CardType.Misfortune) && (args.Card.CardType != CardType.Status))
+                    if (args.Card.CardType != CardType.Misfortune && args.Card.CardType != CardType.Status)
                     {
                         args.CancelBy(this);
                     }
