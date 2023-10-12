@@ -389,6 +389,7 @@
       <None Remove="Resources\StSRunicDome.png" />
       <None Remove="Resources\StSRunicPyramid.png" />
       <None Remove="Resources\StSSacredBark.png" />
+      <None Remove="Resources\StSSentinel.png" />
       <None Remove="Resources\StSSneckoEye.png" />
       <None Remove="Resources\StSSozu.png" />
       <None Remove="Resources\StSSsserpentHead.png" />

@@ -121,14 +121,14 @@ namespace StSStuffMod.Cards
         {
             get
             {
-                return this.CanUse;
+                return CanUse;
             }
         }
         public override bool CanUse
         {
             get
             {
-                return base.Battle != null && base.Battle.HandZone.Count == base.Battle.HandZone.Where((Card card) => card.CardType == CardType.Attack).Count();
+                return Battle != null && Battle.HandZone.Count == Battle.HandZone.Where((card) => card.CardType == CardType.Attack).Count();
             }
         }
     }

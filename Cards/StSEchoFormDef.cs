@@ -189,7 +189,6 @@ namespace StSStuffMod.Cards
             }
             private IEnumerable<BattleAction> OnOwnerStarted(UnitEventArgs args)
             {
-                NotifyActivating();
                 Count = Level;
                 yield break;
             }
@@ -219,6 +218,7 @@ namespace StSStuffMod.Cards
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
                     if (args.Card.Zone == CardZone.Hand)
                     {
+                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
                         yield return new UseCardAction(args.Card, unitSelector, new ManaGroup() { Any = 0 });
                         card = null;
                         unitSelector = null;
@@ -244,6 +244,7 @@ namespace StSStuffMod.Cards
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
                     if (args.Card.Zone == CardZone.Hand)
                     {
+                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
                         yield return new UseCardAction(args.Card, unitSelector, new ManaGroup() { Any = 0 });
                         card = null;
                         unitSelector = null;
@@ -269,6 +270,7 @@ namespace StSStuffMod.Cards
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
                     if (args.Card.Zone == CardZone.Hand)
                     {
+                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
                         yield return new UseCardAction(args.Card, unitSelector, new ManaGroup() { Any = 0 });
                         card = null;
                         unitSelector = null;

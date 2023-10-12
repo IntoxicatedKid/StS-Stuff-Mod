@@ -141,6 +141,7 @@ namespace StSStuffMod.Exhibits
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
                     if (args.Card.Zone == CardZone.Hand)
                     {
+                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
                         yield return new UseCardAction(args.Card, unitSelector, Mana);
                         card = null;
                         unitSelector = null;
@@ -165,6 +166,7 @@ namespace StSStuffMod.Exhibits
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
                     if (args.Card.Zone == CardZone.Hand)
                     {
+                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
                         yield return new UseCardAction(args.Card, unitSelector, Mana);
                         card = null;
                         unitSelector = null;
@@ -189,6 +191,7 @@ namespace StSStuffMod.Exhibits
                     yield return new MoveCardAction(args.Card, CardZone.Hand);
                     if (args.Card.Zone == CardZone.Hand)
                     {
+                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
                         yield return new UseCardAction(args.Card, unitSelector, Mana);
                         card = null;
                         unitSelector = null;

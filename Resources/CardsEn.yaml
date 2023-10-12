@@ -147,6 +147,10 @@ StSReinforcedBody:
   Description: "|For each {Mana} spent|: Gain {Block} |Block|."
   UpgradedDescription: "|For each {Mana} spent|: Gain {Block} |Block|."
   Name: Reinforced Body
+StSSentinel:
+  Description: "Gain {Block} |Block|.\n|When Exiled|: Gain {Mana}."
+  UpgradedDescription: "Gain {Block} |Block|.\n|When Exiled|: Gain {Mana}."
+  Name: Sentinel
 StSSwiftStrike:
   Description: "Deal {Damage} damage."
   UpgradedDescription: "Deal {Damage} damage."

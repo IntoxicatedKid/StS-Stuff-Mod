@@ -99,7 +99,7 @@ namespace StSStuffMod.Cards
                UpgradedKeywords: Keyword.None,
                EmptyDescription: false,
                RelativeKeyword: Keyword.Block,
-               UpgradedRelativeKeyword: Keyword.Philosophy,
+               UpgradedRelativeKeyword: Keyword.Block | Keyword.Philosophy,
 
                RelativeEffects: new List<string>() { },
                UpgradedRelativeEffects: new List<string>() { },
@@ -120,7 +120,7 @@ namespace StSStuffMod.Cards
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
             yield return DefenseAction(true);
-            yield return new GainTurnManaAction(base.Mana);
+            yield return new GainTurnManaAction(Mana);
             yield break;
         }
     }

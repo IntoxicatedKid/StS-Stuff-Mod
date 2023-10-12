@@ -39,7 +39,6 @@ using LBoL.EntityLib.Exhibits.Adventure;
 using LBoL.EntityLib.Adventures.Common;
 using LBoL.EntityLib.Adventures.Shared12;
 using LBoL.EntityLib.Adventures.Stage1;
-using StSStuffMod.Cards;
 
 namespace StSStuffMod.Exhibits
 {
@@ -98,6 +97,7 @@ namespace StSStuffMod.Exhibits
         public sealed class StSStrangeSpoon : Exhibit
         {
             private Card card = null;
+            private System.Random random = new System.Random();
             protected override void OnEnterBattle()
             {
                 ReactBattleEvent(Battle.CardUsing, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsing));
@@ -115,10 +115,9 @@ namespace StSStuffMod.Exhibits
             {
                 if (args.Card == card)
                 {
-                    System.Random random = new System.Random();
                     if (random.Next(0, 2) != 0)
                     {
-                        base.NotifyActivating();
+                        NotifyActivating();
                         args.CancelBy(this);
                         yield return new MoveCardAction(args.Card, CardZone.Discard);
                     }

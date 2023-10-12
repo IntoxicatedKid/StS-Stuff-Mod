@@ -159,6 +159,15 @@ namespace StSStuffMod
                 harmony.UnpatchSelf();
         }
 
-
+        public static class Helpers
+        {
+            public static void FakeQueueConsumingMana(ManaGroup manaGroup)
+            {
+                // should not be changed
+                var cost = manaGroup;
+                var manaPanel = UiManager.GetPanel<BattleManaPanel>();
+                manaPanel._consumingDeque.Insert(0, new BattleManaPanel.ConsumingManaWidgets(new ConsumingMana(cost, cost), manaPanel._unpooledCollection.Prepay(), manaPanel._pooledCollection.Prepay()));
+            }
+        }
     }
 }

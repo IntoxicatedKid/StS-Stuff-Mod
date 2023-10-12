@@ -117,7 +117,7 @@ namespace StSStuffMod.Cards
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            List<Card> list = Battle.HandZone.Where((card) => card.BaseCost.Amount > 0).ToList();
+            List<Card> list = Battle.HandZone.Where((card) => card.Cost.Amount - Math.Max(card.AuraCost.Amount, 0) > 0).ToList();
             if (list.Count > 0)
             {
                 Card card = list.Sample(GameRun.BattleRng);
