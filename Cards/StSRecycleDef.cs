@@ -117,10 +117,10 @@ namespace StSStuffMod.Cards
     {
         public override Interaction Precondition()
         {
-            List<Card> list = Battle.HandZone.Where((hand) => hand != this).ToList();
+            List<Card> list = base.Battle.HandZone.Where((Card hand) => hand != this).ToList<Card>();
             if (list.Count == 1)
             {
-                oneTargetHand = list[0];
+                this.oneTargetHand = list[0];
             }
             if (list.Count <= 1)
             {
@@ -140,11 +140,11 @@ namespace StSStuffMod.Cards
                 }
                 card = null;
             }
-            else if (oneTargetHand != null)
+            else if (this.oneTargetHand != null)
             {
-                yield return new ExileCardAction(oneTargetHand);
-                yield return new GainManaAction(oneTargetHand.ConfigCostAnyToColorless(false));
-                oneTargetHand = null;
+                yield return new ExileCardAction(this.oneTargetHand);
+                yield return new GainManaAction(this.oneTargetHand.ConfigCostAnyToColorless(false));
+                this.oneTargetHand = null;
             }
             yield break;
         }

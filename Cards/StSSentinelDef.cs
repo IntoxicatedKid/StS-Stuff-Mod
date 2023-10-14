@@ -119,11 +119,11 @@ namespace StSStuffMod.Cards
     {
         public override IEnumerable<BattleAction> OnExile(CardZone srcZone)
         {
-            if (Battle.BattleShouldEnd)
+            if (base.Battle.BattleShouldEnd)
             {
                 yield break;
             }
-            yield return new GainManaAction(Mana);
+            yield return new GainManaAction(base.Mana);
             yield break;
         }
     }

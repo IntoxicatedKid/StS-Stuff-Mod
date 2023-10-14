@@ -95,27 +95,20 @@ namespace StSStuffMod.Exhibits
         }
         [EntityLogic(typeof(StSOrreryDef))]
         [UsedImplicitly]
+        [ExhibitInfo(WeighterType = typeof(StSOrreryWeighter))]
         public sealed class StSOrrery : Exhibit
         {
-            /*[HarmonyPatch(typeof(VnPanel), nameof(VnPanel.SetNextButton))]
-            class Orrery_SetNextButton_Patch
-            {
-                static bool Prefix()
-                {
-                    if (GameMaster.Instance.CurrentGameRun.Player.GetExhibit<StSOrrery>().Active)
-                    {
-                        return false;
-                    }
-                    return true;
-                }
-            }*/
             protected override IEnumerator SpecialGain(PlayerUnit player)
             {
+                Active = true;
                 OnGain(player);
                 UiManager.GetPanel<ShopPanel>().Hide();
                 HandleGameRunEvent(GameRun.DeckCardsAdded, delegate (CardsEventArgs args)
                 {
-                    GameMaster.Instance.StartCoroutine(Wait());
+                    if (Active)
+                    {
+                        GameMaster.Instance.StartCoroutine(Wait());
+                    }
                 });
                 GameRun.CurrentStation.ClearRewards();
                 GameRun.CurrentStation.AddReward(GetOrreryReward());
@@ -137,6 +130,7 @@ namespace StSStuffMod.Exhibits
                         UiManager.GetPanel<VnPanel>().SetNextButton(false, null, null);
                         if (UiManager.GetPanel<RewardPanel>()._rewardWidgets.Count == 0)
                         {
+                            Active = false;
                             UiManager.GetPanel<RewardPanel>().Hide();
                             UiManager.GetPanel<VnPanel>().SetNextButton(true, null, null);
                         }
@@ -146,6 +140,7 @@ namespace StSStuffMod.Exhibits
                         UiManager.GetPanel<VnPanel>().SetNextButton(false, null, null);
                         if (UiManager.GetPanel<RewardPanel>()._rewardWidgets.Count == 0)
                         {
+                            Active = false;
                             UiManager.GetPanel<RewardPanel>().Hide();
                             UiManager.GetPanel<VnPanel>().SetNextButton(true, null, null);
                         }
@@ -160,6 +155,7 @@ namespace StSStuffMod.Exhibits
                 UiManager.GetPanel<VnPanel>().SetNextButton(false, null, null);
                 if (UiManager.GetPanel<RewardPanel>()._rewardWidgets.Count == 0)
                 {
+                    Active = false;
                     UiManager.GetPanel<RewardPanel>().Hide();
                     UiManager.GetPanel<VnPanel>().SetNextButton(true, null, null);
                 }
@@ -184,6 +180,13 @@ namespace StSStuffMod.Exhibits
             private StationReward GetOrreryReward()
             {
                 return StationReward.CreateCards(GameRun.GetRewardCards(GameRun.CurrentStage.EnemyCardOnlyPlayerWeight, GameRun.CurrentStage.EnemyCardWithFriendWeight, GameRun.CurrentStage.EnemyCardNeutralWeight, GameRun.CurrentStage.EnemyCardWeight, GameRun.RewardCardCount, false));
+            }
+            private class StSOrreryWeighter : IExhibitWeighter
+            {
+                public float WeightFor(Type type, GameRunController gameRun)
+                {
+                    return 99;
+                }
             }
         }
     }

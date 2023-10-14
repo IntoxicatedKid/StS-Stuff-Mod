@@ -1,5 +1,6 @@
-1.0.8: Added Sentinel. Madness should no longer target temporary 0 cost cards and mana freezed 0 cost cards.  
-Fixed an issue that mana is not paying correctly if you play a card while another card is played by Double Tap or similar effects.  
+1.0.9: Fixed an issue that visual effect from Neow's Lament stays after battle. Orrery should no longer cause Foward button to appear when you buy a card.  
+1.0.8: Added Sentinel. Fixed an issue that mana is not paying correctly if you play a card while another card is played by Double Tap or similar effects.  
+Madness should no longer target temporary 0 cost cards and mana freezed 0 cost cards.  
 1.0.7: Added 8 cards, 8 exhibits.  
 Dramatic Entrance damage 22(24) -> 20(25). Caltrops cost 1WR -> WR. Busted Crown -2 -> -1 option. Ectoplasm makes Upgrading from a Gap free.  
 Accuracy cost WW -> 1WW. Echo Form cost URG -> 2URG. Enlightenment now affects 0 cost cards.  

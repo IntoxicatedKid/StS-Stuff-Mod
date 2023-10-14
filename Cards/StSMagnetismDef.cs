@@ -189,11 +189,12 @@ namespace StSStuffMod.Cards
             public BattleAction Trigger()
             {
                 NotifyActivating();
-                Card[] array = Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), Level, (config) => config.Colors.Contains(ManaColor.Colorless) && config.Id != Id);
+                Card[] array = Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), Level, (config) => config.Colors.Contains(ManaColor.Colorless) && config.Id != base.Id);
                 if (array.Count() > 0)
                 {
                     foreach (Card card in array)
                     {
+                        //card.SetBaseCost(ManaGroup.Anys(card.ConfigCost.Amount));
                         card.IsEthereal = true;
                         card.IsExile = true;
                     }

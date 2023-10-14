@@ -26,6 +26,7 @@ using Mono.Cecil;
 using JetBrains.Annotations;
 using System.Linq;
 using LBoL.EntityLib.StatusEffects.Neutral.Black;
+using static StSStuffMod.Cards.StSPanacheDef;
 using LBoL.EntityLib.StatusEffects.Basic;
 
 namespace StSStuffMod.Cards

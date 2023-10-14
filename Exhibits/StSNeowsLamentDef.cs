@@ -112,6 +112,7 @@ namespace StSStuffMod.Exhibits
             protected override void OnEnterBattle()
             {
                 ReactBattleEvent(Battle.BattleStarted, new EventSequencedReactor<GameEventArgs>(OnBattleStarted));
+                ReactBattleEvent(Battle.BattleEnded, new EventSequencedReactor<GameEventArgs>(OnBattleEnded));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs args)
             {
@@ -120,7 +121,7 @@ namespace StSStuffMod.Exhibits
                     int num = Counter - 1;
                     Counter = num;
                     NotifyActivating();
-                    yield return PerformAction.Effect(Battle.Player, "JunkoPurify", 0f, "Junko3", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
+                    yield return PerformAction.Effect(Battle.Player, "JunkoPurify", 0f, "Junko3", 0f, PerformAction.EffectBehavior.Add, 0f);
                     foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
                     {
                         GameRun.SetEnemyHpAndMaxHp(Value2, enemyUnit.MaxHp, enemyUnit, false);
@@ -128,20 +129,11 @@ namespace StSStuffMod.Exhibits
                 }
                 yield break;
             }
-            /*[HarmonyPatch(typeof(Debut), nameof(Debut.RollBonus))]
-            class Debut_RollBonus_Patch
+            private IEnumerable<BattleAction> OnBattleEnded(GameEventArgs args)
             {
-                bool Prefix(IVariableStorage storage)
-                {
-                    if (GameMaster.Instance.CurrentGameRun.HasClearBonus == false)
-                    {
-                        Exhibit exhibit = LBoL.Core.Library.CreateExhibit<StSNeowsLament>();
-                        storage.SetValue("$money", exhibit.Id);
-                        return true;
-                    }
-                    return true;
-                }
-            }*/
+                yield return PerformAction.Effect(Battle.Player, "JunkoPurify", 0f, null, 0f, PerformAction.EffectBehavior.Remove, 0f);
+                yield break;
+            }
         }
     }
 }

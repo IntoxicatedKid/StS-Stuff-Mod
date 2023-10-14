@@ -115,7 +115,7 @@ namespace StSStuffMod.Cards
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            yield return new GainManaAction(Mana);
+            yield return new GainManaAction(base.Mana);
             yield return new AddCardsToDiscardAction(Library.CreateCards<Yueguang>(1, false));
             yield break;
         }

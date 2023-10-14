@@ -39,6 +39,7 @@ using LBoL.EntityLib.Exhibits.Adventure;
 using LBoL.EntityLib.Adventures.Common;
 using LBoL.EntityLib.Adventures.Shared12;
 using LBoL.EntityLib.Adventures.Stage1;
+using StSStuffMod.Cards;
 
 namespace StSStuffMod.Exhibits
 {
@@ -117,7 +118,7 @@ namespace StSStuffMod.Exhibits
                 {
                     if (random.Next(0, 2) != 0)
                     {
-                        NotifyActivating();
+                        base.NotifyActivating();
                         args.CancelBy(this);
                         yield return new MoveCardAction(args.Card, CardZone.Discard);
                     }

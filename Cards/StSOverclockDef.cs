@@ -21,7 +21,7 @@ using static StSStuffMod.BepinexPlugin;
 using System.Linq;
 using LBoL.EntityLib.Cards.Other.Enemy;
 
-namespace test.Cards
+namespace StSStuffMod.Cards
 {
     public sealed class StSOverclockDef : CardTemplate
     {

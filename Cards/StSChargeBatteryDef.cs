@@ -120,7 +120,7 @@ namespace StSStuffMod.Cards
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
             yield return DefenseAction(true);
-            yield return new GainTurnManaAction(Mana);
+            yield return new GainTurnManaAction(base.Mana);
             yield break;
         }
     }

@@ -119,12 +119,12 @@ namespace StSStuffMod.Cards
         {
             get
             {
-                return Battle != null && Battle.HandZone.Where((card) => card.CardType == CardType.Attack).Count() == 0;
+                return base.Battle != null && Battle.HandZone.Where((card) => card.CardType == CardType.Attack).Count() == 0;
             }
         }
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            if (PlayInTriggered)
+            if (base.PlayInTriggered)
             {
                 yield return new DrawManyCardAction(Value1);
             }
