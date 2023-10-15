@@ -103,12 +103,12 @@ namespace StSStuffMod.Exhibits
                 {
                     if (args.Station.Type == StationType.Adventure)
                     {
+                        NotifyActivating();
                         GameRun.GainMoney(Value1, true, new VisualSourceData
                         {
                             SourceType = VisualSourceType.Entity,
                             Source = this
                         });
-                        NotifyActivating();
                     }
                 });
             }

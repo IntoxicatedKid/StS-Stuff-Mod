@@ -87,7 +87,7 @@ namespace StSStuffMod.Exhibits
                 BaseManaAmount: 0,
                 HasCounter: false,
                 InitialCounter: null,
-                Keywords: Keyword.Exile,
+                Keywords: Keyword.Misfortune | Keyword.Exile,
                 RelativeEffects: new List<string>() { },
                 RelativeCards: new List<string>() { }
             );
@@ -98,7 +98,6 @@ namespace StSStuffMod.Exhibits
         public sealed class StSStrangeSpoon : Exhibit
         {
             private Card card = null;
-            private System.Random random = new System.Random();
             protected override void OnEnterBattle()
             {
                 ReactBattleEvent(Battle.CardUsing, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsing));
@@ -116,9 +115,9 @@ namespace StSStuffMod.Exhibits
             {
                 if (args.Card == card)
                 {
-                    if (random.Next(0, 2) != 0)
+                    if (GameRun.BattleRng.NextInt(0, 1) == 0)
                     {
-                        base.NotifyActivating();
+                        NotifyActivating();
                         args.CancelBy(this);
                         yield return new MoveCardAction(args.Card, CardZone.Discard);
                     }

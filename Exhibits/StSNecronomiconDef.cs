@@ -37,6 +37,7 @@ using JetBrains.Annotations;
 using LBoL.EntityLib.Cards.Character.Marisa;
 using LBoL.EntityLib.StatusEffects.Neutral.TwoColor;
 using StSStuffMod.Cards;
+using System.Reflection.Emit;
 
 namespace StSStuffMod.Exhibits
 {
@@ -75,8 +76,8 @@ namespace StSStuffMod.Exhibits
                 Owner: "",
                 LosableType: ExhibitLosableType.CantLose,
                 Rarity: Rarity.Rare,
-                Value1: 15,
-                Value2: 3,
+                Value1: 3,
+                Value2: null,
                 Value3: null,
                 Mana: new ManaGroup() { Any = 0 },
                 BaseManaRequirement: null,
@@ -97,6 +98,7 @@ namespace StSStuffMod.Exhibits
         {
             private bool Again = false;
             private Card card = null;
+            private ManaGroup manaGroup = ManaGroup.Empty;
             private UnitSelector unitSelector = null;
             protected override void OnGain(PlayerUnit player)
             {
@@ -117,10 +119,11 @@ namespace StSStuffMod.Exhibits
             }
             private IEnumerable<BattleAction> OnCardUsing(CardUsingEventArgs args)
             {
-                if (Active && args.Card.CardType == CardType.Attack && args.ConsumingMana.Amount >= Value2 && args.Card != card)
+                if (Active && args.Card.CardType == CardType.Attack && args.ConsumingMana.Amount >= Value1 && args.Card != card)
                 {
                     Again = true;
                     card = args.Card;
+                    manaGroup = args.ConsumingMana;
                     unitSelector = args.Selector;
                 }
                 yield break;
@@ -129,82 +132,69 @@ namespace StSStuffMod.Exhibits
             {
                 if (!Battle.BattleShouldEnd && Again && args.Card == card && !(args.SourceZone == CardZone.PlayArea && args.DestinationZone == CardZone.Hand))
                 {
-                    Again = false;
-                    if (Battle.HandZone.Count >= Battle.MaxHand)
+                    foreach (var battleAction in Play(args.Card, args))
                     {
-                        card = null;
-                        unitSelector = null;
-                        yield break;
+                        yield return battleAction;
                     }
-                    NotifyActivating();
-                    args.CancelBy(this);
-                    yield return new MoveCardAction(args.Card, CardZone.Hand);
-                    if (args.Card.Zone == CardZone.Hand)
-                    {
-                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
-                        yield return new UseCardAction(args.Card, unitSelector, Mana);
-                        card = null;
-                        unitSelector = null;
-                    }
-                    Active = false;
                 }
-                yield break;
             }
             private IEnumerable<BattleAction> OnCardExiling(CardEventArgs args)
             {
                 if (!Battle.BattleShouldEnd && Again && args.Card == card)
                 {
-                    Again = false;
-                    if (Battle.HandZone.Count >= Battle.MaxHand)
+                    foreach (var battleAction in Play(args.Card, args))
                     {
-                        card = null;
-                        unitSelector = null;
-                        yield break;
+                        yield return battleAction;
                     }
-                    NotifyActivating();
-                    args.CancelBy(this);
-                    yield return new MoveCardAction(args.Card, CardZone.Hand);
-                    if (args.Card.Zone == CardZone.Hand)
-                    {
-                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
-                        yield return new UseCardAction(args.Card, unitSelector, Mana);
-                        card = null;
-                        unitSelector = null;
-                    }
-                    Active = false;
                 }
-                yield break;
             }
             private IEnumerable<BattleAction> OnCardRemoving(CardEventArgs args)
             {
                 if (!Battle.BattleShouldEnd && Again && args.Card == card)
                 {
-                    Again = false;
-                    if (Battle.HandZone.Count >= Battle.MaxHand)
+                    foreach (var battleAction in Play(args.Card, args))
                     {
-                        card = null;
-                        unitSelector = null;
-                        yield break;
+                        yield return battleAction;
                     }
-                    NotifyActivating();
-                    args.CancelBy(this);
-                    yield return new MoveCardAction(args.Card, CardZone.Hand);
-                    if (args.Card.Zone == CardZone.Hand)
-                    {
-                        Helpers.FakeQueueConsumingMana(new ManaGroup() { Any = 0 });
-                        yield return new UseCardAction(args.Card, unitSelector, Mana);
-                        card = null;
-                        unitSelector = null;
-                    }
-                    Active = false;
                 }
-                yield break;
+            }
+            private IEnumerable<BattleAction> Play(Card Card, GameEventArgs args)
+            {
+                Again = false;
+                Battle.MaxHand += 1;
+                if (Battle.HandZone.Count >= Battle.MaxHand)
+                {
+                    Battle.MaxHand -= 1;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
+                    yield break;
+                }
+                NotifyActivating();
+                args.CancelBy(this);
+                yield return new MoveCardAction(Card, CardZone.Hand);
+                Battle.MaxHand -= 1;
+                if (Card.Zone == CardZone.Hand)
+                {
+                    if (unitSelector.Type == TargetType.SingleEnemy && !unitSelector.SelectedEnemy.IsAlive)
+                    {
+                        unitSelector = new UnitSelector(Battle.AllAliveEnemies.Sample(GameRun.BattleRng));
+                    }
+                    Battle.GainMana(manaGroup);
+                    Helpers.FakeQueueConsumingMana(manaGroup);
+                    yield return new UseCardAction(Card, unitSelector, manaGroup);
+                }
+                Active = false;
+                card = null;
+                manaGroup = ManaGroup.Empty;
+                unitSelector = null;
             }
             protected override void OnLeaveBattle()
             {
                 Active = false;
                 Again = false;
                 card = null;
+                manaGroup = ManaGroup.Empty;
                 unitSelector = null;
             }
         }

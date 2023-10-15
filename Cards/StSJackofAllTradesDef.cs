@@ -114,7 +114,7 @@ namespace StSStuffMod.Cards
     {
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            List<Card> list = base.Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), base.Value1, (CardConfig config) => config.Colors.Contains(ManaColor.Colorless) && config.Id != base.Id).ToList<Card>();
+            List<Card> list = Battle.RollCardsWithoutManaLimit(new CardWeightTable(RarityWeightTable.BattleCard, OwnerWeightTable.Valid, CardTypeWeightTable.CanBeLoot), Value1, (CardConfig config) => config.Colors.Contains(ManaColor.Colorless) && config.Id != Id).ToList<Card>();
             if (list.Count > 0)
             {
                 foreach (Card card in list)

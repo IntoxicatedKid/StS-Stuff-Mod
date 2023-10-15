@@ -195,9 +195,8 @@ namespace StSStuffMod.Cards
                 }
                 NotifyActivating();
                 GameRun.SynergyAdditionalCount += 1;
-                int max = Level;
                 int mayhemcount = 1;
-                while (mayhemcount <= max)
+                while (mayhemcount <= Level)
                 {
                     if (Battle.BattleShouldEnd)
                     {
@@ -206,15 +205,17 @@ namespace StSStuffMod.Cards
                     }
                     List<Card> list = Battle.DrawZone.ToList();
                     List<Card> list2 = Battle.DiscardZone.ToList();
-                    if (list.Count == 0 && list2.Count > 0)
+                    if (list.Count <= 0 && list2.Count > 0)
                     {
                         yield return new ReshuffleAction();
                         mayhemcount -= 1;
                     }
-                    if (list.Count > 0)
+                    else if (list.Count > 0)
                     {
                         Card card = list.First();
+                        Battle.MaxHand += 1;
                         yield return new MoveCardAction(card, CardZone.Hand);
+                        Battle.MaxHand -= 1;
                         if (card.Zone == CardZone.Hand && (card is Bribery || card is Payment))
                         {
                             yield return new ExileCardAction(card);
@@ -225,35 +226,40 @@ namespace StSStuffMod.Cards
                         }
                         else if (card.Zone == CardZone.Hand && card.Config.TargetType == TargetType.Nobody && (card.CardType != CardType.Friend || card.CardType == CardType.Friend && !card.Summoned || card.CardType == CardType.Friend && card.Summoned && card.Loyalty >= -card.MinFriendCost) && !card.IsForbidden)
                         {
+                            Helpers.FakeQueueConsumingMana(Mana);
                             yield return new UseCardAction(card, UnitSelector.Nobody, Mana);
                         }
                         else if (card.Zone == CardZone.Hand && card.Config.TargetType == TargetType.SingleEnemy && (card.CardType != CardType.Friend || card.CardType == CardType.Friend && !card.Summoned || card.CardType == CardType.Friend && card.Summoned && card.Loyalty >= -card.MinFriendCost) && !card.IsForbidden)
                         {
                             EnemyUnit enemy = Battle.AllAliveEnemies.Sample(GameRun.BattleRng);
                             UnitSelector unitSelector = new UnitSelector(enemy);
+                            Helpers.FakeQueueConsumingMana(Mana);
                             yield return new UseCardAction(card, unitSelector, Mana);
                         }
                         else if (card.Zone == CardZone.Hand && card.Config.TargetType == TargetType.AllEnemies && (card.CardType != CardType.Friend || card.CardType == CardType.Friend && !card.Summoned || card.CardType == CardType.Friend && card.Summoned && card.Loyalty >= -card.MinFriendCost) && !card.IsForbidden)
                         {
+                            Helpers.FakeQueueConsumingMana(Mana);
                             yield return new UseCardAction(card, UnitSelector.AllEnemies, Mana);
                         }
                         else if (card.Zone == CardZone.Hand && card.Config.TargetType == TargetType.RandomEnemy && (card.CardType != CardType.Friend || card.CardType == CardType.Friend && !card.Summoned || card.CardType == CardType.Friend && card.Summoned && card.Loyalty >= -card.MinFriendCost) && !card.IsForbidden)
                         {
+                            Helpers.FakeQueueConsumingMana(Mana);
                             yield return new UseCardAction(card, UnitSelector.RandomEnemy, Mana);
                         }
                         else if (card.Zone == CardZone.Hand && card.Config.TargetType == TargetType.Self && (card.CardType != CardType.Friend || card.CardType == CardType.Friend && !card.Summoned || card.CardType == CardType.Friend && card.Summoned && card.Loyalty >= -card.MinFriendCost) && !card.IsForbidden)
                         {
+                            Helpers.FakeQueueConsumingMana(Mana);
                             yield return new UseCardAction(card, UnitSelector.Self, Mana);
                         }
                         else if (card.Zone == CardZone.Hand && card.Config.TargetType == TargetType.All && (card.CardType != CardType.Friend || card.CardType == CardType.Friend && !card.Summoned || card.CardType == CardType.Friend && card.Summoned && card.Loyalty >= -card.MinFriendCost) && !card.IsForbidden)
                         {
+                            Helpers.FakeQueueConsumingMana(Mana);
                             yield return new UseCardAction(card, UnitSelector.All, Mana);
                         }
                     }
                     mayhemcount += 1;
                 }
                 GameRun.SynergyAdditionalCount -= 1;
-                yield break;
             }
         }
     }

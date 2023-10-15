@@ -65,7 +65,7 @@ namespace StSStuffMod.Cards
                Cost: new ManaGroup() { Any = 2, Red = 1 },
                UpgradedCost: new ManaGroup() { Any = 3 },
                MoneyCost: null,
-               Damage: 10,
+               Damage: 12,
                UpgradedDamage: null,
                Block: null,
                UpgradedBlock: null,

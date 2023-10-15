@@ -1,5 +1,5 @@
 # StS-Stuff-Mod  
-Adds 41 Cards, 30 Exhibits from Slay the Spire to the game. Many contents from StS are already imported and redesigned in LBoL, so i focus on things that aren't in this game yet.  
+Adds 41 Cards, 32 Exhibits from Slay the Spire to the game. Many contents from StS are already imported and redesigned in LBoL, so i focus on things that aren't in this game yet.  
 You need BepInEx and LBoL-Entity-Sideloader to use this mod.
 
 Installation(Github): Download StSStuffMod.dll and place it to Steam\steamapps\common\LBoL\BepInEx\plugins

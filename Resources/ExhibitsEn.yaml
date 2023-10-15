@@ -10,6 +10,10 @@ StSCauldron:
   Description: "When acquired, choose {Value1} random |Tool| cards to add to the library."
   Name: Cauldron
   FlavorText: "The Merchant is actually a rather skilled potion brewer. Buy 4 get 1 free."
+StSCeramicFish:
+  Description: "Whenever a card is added to the library, gain {Value1} <sprite=\"Point\" name=\"Gold\">."
+  Name: Ceramic Fish
+  FlavorText: "Meticulously painted, these fish were revered to bring great fortune."
 StSCoffeeDripper:
   Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nRemoves the ability to |Drink| at Gaps."
   Name: Coffee Dripper
@@ -38,12 +42,16 @@ StSFusionHammer:
   Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nRemoves the ability to |Upgrade| at Gaps."
   Name: Fusion Hammer
   FlavorText: "Once wielded, the owner can never let go."
+StSIncenseBurner:
+  Description: "Every {Value1} turns, gain {Value2} |Flawless|."
+  Name: Incense Burner
+  FlavorText: "The smoke imbues its owner with the spirit of the burned."
 StSMedicalKit:
   Description: "All |Unplayable| Status cards |costs| {Mana}, has |Exile|, and loses |Unplayable|."
   Name: Medical Kit
   FlavorText: '"Has everything you need! Anti-itch, anti-burn, anti-venom, and more!"'
 StSNecronomicon:
-  Description: "When acquired, add a |Necronomicurse| to the library.\nWhen {Value2} or more mana is spent to play an attack card for the first time each turn, play that card again."
+  Description: "When acquired, add a |Necronomicurse| to the library.\nWhen {Value1} or more mana is spent to play an attack card for the first time each turn, play that card again."
   Name: Necronomicon
   FlavorText: "Only a fool would try and harness this evil power. At night your dreams are haunted by images of the book devouring your mind."
 StSNeowsLament:

@@ -1,5 +1,9 @@
+1.1.1: Added Ceramic Fish. Fixed Incense Burner not working.  
+1.1.0: Added Incense Burner. Clash damage 21(27) -> 20(26), is now Accurate. Perfected Strike damage 10 -> 12. Charge Battery block 13(18) -> 15(20).  
+Double Tap-like effects can now play X cost cards as if same amount of mana has been paid, can now target random alive enemy if current target is dead.  
+In return, Double Tap, Burst, and Amplify's cost has been increased by 1.  
 1.0.9: Fixed an issue that visual effect from Neow's Lament stays after battle. Orrery should no longer cause Foward button to appear when you buy a card.  
-1.0.8: Added Sentinel. Fixed an issue that mana is not paying correctly if you play a card while another card is played by Double Tap or similar effects.  
+1.0.8: Added Sentinel. Fixed an issue that mana is not paying correctly if you play a card while another card is played by Double Tap-like effects.  
 Madness should no longer target temporary 0 cost cards and mana freezed 0 cost cards.  
 1.0.7: Added 8 cards, 8 exhibits.  
 Dramatic Entrance damage 22(24) -> 20(25). Caltrops cost 1WR -> WR. Busted Crown -2 -> -1 option. Ectoplasm makes Upgrading from a Gap free.  

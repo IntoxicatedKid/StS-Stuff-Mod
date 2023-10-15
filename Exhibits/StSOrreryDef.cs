@@ -95,7 +95,6 @@ namespace StSStuffMod.Exhibits
         }
         [EntityLogic(typeof(StSOrreryDef))]
         [UsedImplicitly]
-        [ExhibitInfo(WeighterType = typeof(StSOrreryWeighter))]
         public sealed class StSOrrery : Exhibit
         {
             protected override IEnumerator SpecialGain(PlayerUnit player)
@@ -180,13 +179,6 @@ namespace StSStuffMod.Exhibits
             private StationReward GetOrreryReward()
             {
                 return StationReward.CreateCards(GameRun.GetRewardCards(GameRun.CurrentStage.EnemyCardOnlyPlayerWeight, GameRun.CurrentStage.EnemyCardWithFriendWeight, GameRun.CurrentStage.EnemyCardNeutralWeight, GameRun.CurrentStage.EnemyCardWeight, GameRun.RewardCardCount, false));
-            }
-            private class StSOrreryWeighter : IExhibitWeighter
-            {
-                public float WeightFor(Type type, GameRunController gameRun)
-                {
-                    return 99;
-                }
             }
         }
     }

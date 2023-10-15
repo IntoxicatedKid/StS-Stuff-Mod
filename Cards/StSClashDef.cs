@@ -71,8 +71,8 @@ namespace StSStuffMod.Cards
                Cost: new ManaGroup() { Any = 0 },
                UpgradedCost: null,
                MoneyCost: null,
-               Damage: 21,
-               UpgradedDamage: 27,
+               Damage: 20,
+               UpgradedDamage: 26,
                Block: null,
                UpgradedBlock: null,
                Shield: null,
@@ -95,8 +95,8 @@ namespace StSStuffMod.Cards
                UltimateCost: null,
                UpgradedUltimateCost: null,
 
-               Keywords: Keyword.None,
-               UpgradedKeywords: Keyword.None,
+               Keywords: Keyword.Accuracy,
+               UpgradedKeywords: Keyword.Accuracy,
                EmptyDescription: false,
                RelativeKeyword: Keyword.None,
                UpgradedRelativeKeyword: Keyword.None,
@@ -128,7 +128,7 @@ namespace StSStuffMod.Cards
         {
             get
             {
-                return base.Battle != null && base.Battle.HandZone.Count == base.Battle.HandZone.Where((Card card) => card.CardType == CardType.Attack).Count();
+                return Battle != null && Battle.HandZone.Count == Battle.HandZone.Where((Card card) => card.CardType == CardType.Attack).Count();
             }
         }
     }

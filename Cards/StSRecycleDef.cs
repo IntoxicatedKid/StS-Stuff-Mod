@@ -117,7 +117,7 @@ namespace StSStuffMod.Cards
     {
         public override Interaction Precondition()
         {
-            List<Card> list = base.Battle.HandZone.Where((Card hand) => hand != this).ToList<Card>();
+            List<Card> list = Battle.HandZone.Where((Card hand) => hand != this).ToList<Card>();
             if (list.Count == 1)
             {
                 this.oneTargetHand = list[0];

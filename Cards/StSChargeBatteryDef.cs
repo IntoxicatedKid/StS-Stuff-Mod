@@ -73,8 +73,8 @@ namespace StSStuffMod.Cards
                MoneyCost: null,
                Damage: null,
                UpgradedDamage: null,
-               Block: 13,
-               UpgradedBlock: 18,
+               Block: 15,
+               UpgradedBlock: 20,
                Shield: null,
                UpgradedShield: null,
                Value1: null,
@@ -120,7 +120,7 @@ namespace StSStuffMod.Cards
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
             yield return DefenseAction(true);
-            yield return new GainTurnManaAction(base.Mana);
+            yield return new GainTurnManaAction(Mana);
             yield break;
         }
     }

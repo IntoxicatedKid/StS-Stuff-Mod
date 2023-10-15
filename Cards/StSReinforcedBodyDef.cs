@@ -124,13 +124,13 @@ namespace StSStuffMod.Cards
         }
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
-            int num = base.SynergyAmount(consumingMana, ManaColor.Any, 1);
+            int num = SynergyAmount(consumingMana, ManaColor.Any, 1);
             if (num > 0)
             {
                 bool flag = true;
                 for (int i = 0; i < num; i++)
                 {
-                    yield return new CastBlockShieldAction(base.Battle.Player, base.Battle.Player, base.Block, flag);
+                    yield return new CastBlockShieldAction(Battle.Player, Battle.Player, Block, flag);
                     flag = false;
                 }
             }

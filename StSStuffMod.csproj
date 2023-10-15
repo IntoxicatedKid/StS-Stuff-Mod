@@ -332,6 +332,7 @@
       <None Remove="Resources\StSBustedCrown.png" />
       <None Remove="Resources\StSCaltrops.png" />
       <None Remove="Resources\StSCauldron.png" />
+      <None Remove="Resources\StSCeramicFish.png" />
       <None Remove="Resources\StSChargeBattery.png" />
       <None Remove="Resources\StSClash.png" />
       <None Remove="Resources\StSCoffeeDripper.png" />
@@ -356,6 +357,7 @@
       <None Remove="Resources\StSFusionHammer.png" />
       <None Remove="Resources\StSGoodInstincts.png" />
       <None Remove="Resources\StSImpatience.png" />
+      <None Remove="Resources\StSIncenseBurner.png" />
       <None Remove="Resources\StSJackofAllTrades.png" />
       <None Remove="Resources\StSLimitBreak.png" />
       <None Remove="Resources\StSMadness.png" />
