@@ -119,7 +119,7 @@ namespace StSStuffMod.Exhibits
             }
             private IEnumerable<BattleAction> OnCardUsing(CardUsingEventArgs args)
             {
-                if (Active && args.Card.CardType == CardType.Attack && args.ConsumingMana.Amount >= Value1 && args.Card != card)
+                if (Active && args.Card.CardType == CardType.Attack && args.Card != card && args.ConsumingMana.Amount >= Value1)
                 {
                     Again = true;
                     card = args.Card;
@@ -183,11 +183,19 @@ namespace StSStuffMod.Exhibits
                     Battle.GainMana(manaGroup);
                     Helpers.FakeQueueConsumingMana(manaGroup);
                     yield return new UseCardAction(Card, unitSelector, manaGroup);
+                    if (Card.Zone == CardZone.Hand && Card.IsExile)
+                    {
+                        yield return new ExileCardAction(Card);
+                    }
+                    else if (Card.Zone == CardZone.Hand)
+                    {
+                        yield return new MoveCardAction(Card, CardZone.Discard);
+                    }
                 }
-                Active = false;
                 card = null;
                 manaGroup = ManaGroup.Empty;
                 unitSelector = null;
+                Active = false;
             }
             protected override void OnLeaveBattle()
             {

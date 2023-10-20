@@ -32,6 +32,7 @@ using LBoL.EntityLib.StatusEffects.Reimu;
 using LBoL.EntityLib.StatusEffects.Neutral.Green;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Presentation.UI;
+using LBoL.Core.Battle.Interactions;
 
 namespace StSStuffMod.Cards
 {
@@ -182,6 +183,10 @@ namespace StSStuffMod.Cards
             private Card card = null;
             private ManaGroup manaGroup = ManaGroup.Empty;
             private UnitSelector unitSelector = null;
+            private int? activeCost = null;
+            private int? upgradedActiveCost = null;
+            private int? ultimateCost = null;
+            private int? upgradedUltimateCost = null;
             protected override void OnAdded(Unit unit)
             {
                 ReactOwnerEvent(Owner.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnOwnerStarted));
@@ -197,12 +202,19 @@ namespace StSStuffMod.Cards
             }
             private IEnumerable<BattleAction> OnCardUsing(CardUsingEventArgs args)
             {
-                if (Count > 0 && args.Card != card && args.Card.CardType != CardType.Misfortune && args.Card.CardType != CardType.Status)
+                if (Count > 0 && args.Card != card && args.Card.CardType != CardType.Misfortune && args.Card.CardType != CardType.Status && (args.Card.CardType != CardType.Friend || (args.Card.CardType == CardType.Friend && args.Card.Summoned)))
                 {
                     Again = true;
                     card = args.Card;
                     manaGroup = args.ConsumingMana;
                     unitSelector = args.Selector;
+                    if (args.Card.CardType == CardType.Friend)
+                    {
+                        activeCost = args.Card.Config.ActiveCost;
+                        upgradedActiveCost = args.Card.Config.UpgradedActiveCost;
+                        ultimateCost = args.Card.Config.UltimateCost;
+                        upgradedUltimateCost = args.Card.Config.UpgradedUltimateCost;
+                    }
                 }
                 yield break;
             }
@@ -215,6 +227,17 @@ namespace StSStuffMod.Cards
                         yield return battleAction;
                     }
                 }
+                else if (Battle.BattleShouldEnd)
+                {
+                    Again = false;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
+                    activeCost = null;
+                    upgradedActiveCost = null;
+                    ultimateCost = null;
+                    upgradedUltimateCost= null;
+                }
             }
             private IEnumerable<BattleAction> OnCardExiling(CardEventArgs args)
             {
@@ -225,6 +248,17 @@ namespace StSStuffMod.Cards
                         yield return battleAction;
                     }
                 }
+                else if (Battle.BattleShouldEnd)
+                {
+                    Again = false;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
+                    activeCost = null;
+                    upgradedActiveCost = null;
+                    ultimateCost = null;
+                    upgradedUltimateCost = null;
+                }
             }
             private IEnumerable<BattleAction> OnCardRemoving(CardEventArgs args)
             {
@@ -234,6 +268,17 @@ namespace StSStuffMod.Cards
                     {
                         yield return battleAction;
                     }
+                }
+                else if (Battle.BattleShouldEnd)
+                {
+                    Again = false;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
+                    activeCost = null;
+                    upgradedActiveCost = null;
+                    ultimateCost = null;
+                    upgradedUltimateCost = null;
                 }
             }
             private IEnumerable<BattleAction> Play(Card Card, GameEventArgs args)
@@ -246,6 +291,13 @@ namespace StSStuffMod.Cards
                     card = null;
                     manaGroup = ManaGroup.Empty;
                     unitSelector = null;
+                    if (Card.CardType == CardType.Friend)
+                    {
+                        activeCost = null;
+                        upgradedActiveCost = null;
+                        ultimateCost = null;
+                        upgradedUltimateCost = null;
+                    }
                     yield break;
                 }
                 NotifyActivating();
@@ -258,9 +310,53 @@ namespace StSStuffMod.Cards
                     {
                         unitSelector = new UnitSelector(Battle.AllAliveEnemies.Sample(GameRun.BattleRng));
                     }
-                    Battle.GainMana(manaGroup);
-                    Helpers.FakeQueueConsumingMana(manaGroup);
-                    yield return new UseCardAction(Card, unitSelector, manaGroup);
+                    if (Card.CardType == CardType.Friend)
+                    {
+                        Card.Config.ActiveCost = 0;
+                        Card.Config.UpgradedActiveCost = 0;
+                        if (Card.UltimateUsed || Card.FriendU.CostType == FriendCostType.Active)
+                        {
+                            Card.Config.UltimateCost = 0;
+                            Card.Config.UpgradedUltimateCost = 0;
+                        }
+                        Battle.GainMana(manaGroup);
+                        Helpers.FakeQueueConsumingMana(manaGroup);
+                        yield return new UseCardAction(Card, unitSelector, manaGroup);
+                        Card.Config.ActiveCost = activeCost;
+                        Card.Config.UpgradedActiveCost = upgradedActiveCost;
+                        activeCost = null;
+                        upgradedActiveCost = null;
+                        Card.Config.UltimateCost = ultimateCost;
+                        Card.Config.UpgradedUltimateCost = upgradedUltimateCost;
+                        ultimateCost = null;
+                        upgradedUltimateCost = null;
+                        if (Card.Zone == CardZone.Hand && (Card.UltimateUsed || Card.Loyalty <= 0))
+                        {
+                            yield return new RemoveCardAction(Card);
+                        }
+                        else if (Card.Zone == CardZone.Hand && Card.Loyalty > 0)
+                        {
+                            yield return new MoveCardAction(Card, CardZone.Discard);
+                        }
+                    }
+                    else
+                    {
+                        Battle.GainMana(manaGroup);
+                        Helpers.FakeQueueConsumingMana(manaGroup);
+                        yield return new UseCardAction(Card, unitSelector, manaGroup);
+                        if (Card.Zone == CardZone.Hand && Card.CardType == CardType.Ability)
+                        {
+                            yield return new RemoveCardAction(Card);
+                        }
+                        else if (Card.Zone == CardZone.Hand && Card.IsExile)
+                        {
+                            yield return new ExileCardAction(Card);
+                        }
+                        else if (Card.Zone == CardZone.Hand)
+                        {
+                            yield return new MoveCardAction(Card, CardZone.Discard);
+                        }
+                    }
                 }
                 card = null;
                 manaGroup = ManaGroup.Empty;

@@ -110,7 +110,7 @@ namespace StSStuffMod.Exhibits
         {
             protected override void OnEnterBattle()
             {
-                ReactBattleEvent(Battle.Player.TurnStarted, new EventSequencedReactor<UnitEventArgs>(this.OnPlayerTurnStarted));
+                ReactBattleEvent(Battle.Player.TurnStarted, new EventSequencedReactor<UnitEventArgs>(OnPlayerTurnStarted));
             }
             private IEnumerable<BattleAction> OnPlayerTurnStarted(UnitEventArgs args)
             {

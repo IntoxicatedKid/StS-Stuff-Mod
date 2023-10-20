@@ -121,7 +121,7 @@ namespace StSStuffMod.Cards
         {
             get
             {
-                return this.CanUse;
+                return CanUse;
             }
         }
         public override bool CanUse

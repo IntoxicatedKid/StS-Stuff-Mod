@@ -166,7 +166,8 @@ namespace StSStuffMod
                 // should not be changed
                 var cost = manaGroup;
                 var manaPanel = UiManager.GetPanel<BattleManaPanel>();
-                manaPanel._consumingDeque.Insert(0, new BattleManaPanel.ConsumingManaWidgets(new ConsumingMana(cost, new ManaGroup { Any = 0 }), manaPanel._unpooledCollection.Prepay(), manaPanel._pooledCollection.Prepay()));
+                manaPanel._consumingDeque.Insert(0, new BattleManaPanel.ConsumingManaWidgets(new ConsumingMana(cost, new ManaGroup() { Any = 0 }), new List<BattleManaWidget>() { }, new List<BattleManaWidget>() { }));
+
             }
         }
     }

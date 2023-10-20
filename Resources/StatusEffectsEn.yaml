@@ -34,6 +34,10 @@ StSPanicButtonSe:
     Brief: "Can't gain |Block| or |Barrier| from cards."
     Description: "{OwnerName} can't gain |Block| or |Barrier| from cards for {Duration} turn{Duration:plural one='' other='s'}."
     Name: Panic Button
+StSTerrorSe:
+    Brief: "|Vulnerable| can't be removed from {OwnerName}."
+    Description: "|Vulnerable| can't be removed from {OwnerName}."
+    Name: Terror
 StSTheBombSe:
     Brief: "When removed, deal damage to each enemy."
     Description: "When removed, deal {Count} damage to each enemy."

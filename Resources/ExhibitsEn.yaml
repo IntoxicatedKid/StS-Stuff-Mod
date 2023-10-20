@@ -26,10 +26,18 @@ StSCursedKey:
   Description: "Adds {BaseMana} to the mana base.\nWhenever {PlayerName} visits Reisen, add a random |Misfortune| card to the library.\n{SelfName} can't be found after act 3."
   Name: Cursed Key
   FlavorText: "You can feel the malicious energy emanating from the key. Power comes at a price."
+StSDamaru:
+  Description: "At the start of {PlayerName}'s turn, gain {Value1} |Charge|."
+  Name: Damaru
+  FlavorText: "The sound of the small drum keeps your mind awake, revealing a path forward."
 StSEctoplasm:
   Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer gain <sprite=\"Point\" name=\"Gold\">. |Upgrading| at a Gap will always cost {Value1} <sprite=\"Point\" name=\"Gold\">.\n{SelfName} can't be found after act 3."
   Name: Ectoplasm
   FlavorText: "This blob of slime and energy seems to pulse with life."
+StSEmotionChip:
+  Description: "At the start of {PlayerName}'s turn, if {PlayerName} loses life last turn, activate the |f:Passive Skill| of each summoned |Teammate| in the hand."
+  Name: Emotion Chip
+  FlavorText: "...<3...?"
 StSEnchiridion:
   Description: "At the start of combat, add a random ability card to the hand. It |temporarily costs| {Mana}."
   Name: Enchiridion
@@ -58,6 +66,10 @@ StSNeowsLament:
   Description: "At the start of your next {Value1} combats, all enemies have {Value2} life.\n{SelfName} can't be found after act 2."
   Name: Neow's Lament
   FlavorText: "The blessing of lamentation bestowed by Neow."
+StSNinjaScroll:
+  Description: "At the start of combat, add {Value1:plural one='% |Throwing Knife|' other='% |Throwing Knives|'} to the hand.\nThey have |Auto-Exile|."
+  Name: Ninja Scroll
+  FlavorText: "Contains the secrets of assassination."
 StSNlothsGift:
   Description: "Triples the chance to find rare cards."
   Name: N'loth's Gift
@@ -77,7 +89,7 @@ StSPandorasBox:
 StSPhilosophersStone:
   Description: "Adds {BaseMana} to the mana base.\nAt the start of combat, enemies gain {Value1} |Firepower|.\n{SelfName} can't be found after act 3."
   Name: Philosopher's Stone
-  FlavorText: "This blob of slime and energy seems to pulse with life."
+  FlavorText: "Raw energy emanates from the stone, empowering all nearby."
 StSRunicDome:
   Description: "Adds {BaseMana} to the mana base.\n{PlayerName} can no longer see enemy intents.\n{SelfName} can't be found after act 3."
   Name: Runic Dome
@@ -94,6 +106,10 @@ StSSneckoEye:
   Description: "Draw {Value1} more {Value1:plural one='card' other='cards'} during the draw step.\nWhenever a card is drawn, it costs between <sprite=\"ManaSprite\" name=\"0\"> to <sprite=\"ManaSprite\" name=\"5\"> this combat."
   Name: Snecko Eye
   FlavorText: "An eye of a fallen snecko. Much larger than you imagined."
+StSSneckoSkull:
+  Description: "Whenever {PlayerName} applies |Poison|, apply {Value1} more |Poison|."
+  Name: Snecko Skull
+  FlavorText: "A snecko skull in pristine condition. Mysteriously clean and smooth, dirt and grime fall off inexplicably."
 StSSozu:
   Description: "At the start of {PlayerName}'s turn, gain 1 random mana.\nAll |Tool| cards has |Unplayable|."
   Name: Sozu

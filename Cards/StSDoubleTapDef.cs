@@ -211,6 +211,13 @@ namespace StSStuffMod.Cards
                         yield return battleAction;
                     }
                 }
+                else if (Battle.BattleShouldEnd)
+                {
+                    Again = false;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
+                }
             }
             private IEnumerable<BattleAction> OnCardExiling(CardEventArgs args)
             {
@@ -221,6 +228,13 @@ namespace StSStuffMod.Cards
                         yield return battleAction;
                     }
                 }
+                else if (Battle.BattleShouldEnd)
+                {
+                    Again = false;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
+                }
             }
             private IEnumerable<BattleAction> OnCardRemoving(CardEventArgs args)
             {
@@ -230,6 +244,13 @@ namespace StSStuffMod.Cards
                     {
                         yield return battleAction;
                     }
+                }
+                else if (Battle.BattleShouldEnd)
+                {
+                    Again = false;
+                    card = null;
+                    manaGroup = ManaGroup.Empty;
+                    unitSelector = null;
                 }
             }
             private IEnumerable<BattleAction> Play(Card Card, GameEventArgs args)
@@ -257,6 +278,14 @@ namespace StSStuffMod.Cards
                     Battle.GainMana(manaGroup);
                     Helpers.FakeQueueConsumingMana(manaGroup);
                     yield return new UseCardAction(Card, unitSelector, manaGroup);
+                    if (Card.Zone == CardZone.Hand && Card.IsExile)
+                    {
+                        yield return new ExileCardAction(Card);
+                    }
+                    else if (Card.Zone == CardZone.Hand)
+                    {
+                        yield return new MoveCardAction(Card, CardZone.Discard);
+                    }
                 }
                 card = null;
                 manaGroup = ManaGroup.Empty;
